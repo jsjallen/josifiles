@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Операция Kompromat: Joe & Simon</title>
+
+  <style>
+    :root {
+      --paper: #f4ecd8;
+      --paper-dark: #d8ccb3;
+      --ink: #1d1b16;
+      --red: #9b1c1c;
+      --stamp: #b00000;
+      --green: #24352b;
+      --line: rgba(29, 27, 22, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Courier New", Courier, monospace;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.18), transparent 35%),
+        linear-gradient(135deg, #1c211d, #080a08);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 32px;
+    }
+
+    .watermark {
+      position: fixed;
+      inset: auto 5vw 8vh auto;
+      z-index: 0;
+      font-size: clamp(3rem, 10vw, 9rem);
+      color: rgba(155, 28, 28, 0.08);
+      font-weight: bold;
+      transform: rotate(-18deg);
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    .dossier {
+      max-width: 1200px;
+      margin: 0 auto;
+      background:
+        linear-gradient(rgba(255,255,255,0.18), rgba(255,255,255,0.05)),
+        var(--paper);
+      border: 1px solid #796f5d;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.55);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .dossier::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.13;
+      pointer-events: none;
+    }
+
+    header {
+      position: relative;
+      padding: 34px;
+      border-bottom: 3px double var(--ink);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .label {
+      display: inline-block;
+      border: 2px solid var(--red);
+      color: var(--red);
+      padding: 6px 10px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      transform: rotate(-2deg);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 4.8rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+    }
+
+    .subtitle {
+      margin-top: 16px;
+      max-width: 720px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .cyrillic-note {
+      display: inline-block;
+      margin-top: 12px;
+      border-top: 1px solid rgba(29, 27, 22, 0.35);
+      padding-top: 10px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .stamp {
+      border: 5px solid var(--stamp);
+      color: var(--stamp);
+      padding: 18px 22px;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 1.35rem;
+      font-weight: bold;
+      transform: rotate(7deg);
+      opacity: 0.88;
+      align-self: center;
+      line-height: 1.15;
+    }
+
+    .meta-strip {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--ink);
+      background: rgba(255,255,255,0.2);
+    }
+
+    .meta {
+      padding: 14px 18px;
+      border-right: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+
+    .meta:last-child {
+      border-right: 0;
+    }
+
+    .meta strong {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.75;
+      margin-bottom: 4px;
+    }
+
+    main {
+      position: relative;
+      padding: 34px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      margin-bottom: 34px;
+    }
+
+    .typewritten {
+      border-left: 5px solid var(--ink);
+      padding-left: 18px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .warning-box {
+      background: var(--green);
+      color: #f4ecd8;
+      padding: 22px;
+      border: 2px solid #0e1712;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08);
+    }
+
+    .warning-box h2 {
+      margin-top: 0;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 34px 0 18px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1.15rem;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--ink);
+      opacity: 0.35;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .file-card {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      background: rgba(255,255,255,0.35);
+      border: 1px solid rgba(29,27,22,0.42);
+      padding: 20px;
+      min-height: 180px;
+      position: relative;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .file-card:hover {
+      transform: translateY(-4px) rotate(-0.5deg);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.22);
+      background: rgba(255,255,255,0.55);
+    }
+
+    .file-card::before {
+      content: attr(data-code);
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-size: 0.75rem;
+      opacity: 0.5;
+    }
+
+    .file-card .icon {
+      font-size: 2rem;
+      margin-bottom: 22px;
+    }
+
+    .file-card h3 {
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+
+    .file-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .redacted {
+      background: #111;
+      color: transparent;
+      padding: 0 4px;
+      user-select: none;
+    }
+
+    .profiles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .profile {
+      border: 1px solid var(--ink);
+      padding: 20px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .profile h3 {
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      font-size: 1.4rem;
+    }
+
+    .profile ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.7;
+    }
+
+    .case-note {
+      margin-top: 34px;
+      padding: 20px;
+      border: 2px dashed rgba(29, 27, 22, 0.45);
+      background: rgba(255,255,255,0.22);
+      line-height: 1.6;
+    }
+
+    .case-note strong {
+      color: var(--red);
+      text-transform: uppercase;
+    }
+
+    footer {
+      position: relative;
+      padding: 22px 34px;
+      border-top: 1px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 850px) {
+      body {
+        padding: 12px;
+      }
+
+      header,
+      main,
+      footer {
+        padding: 22px;
+      }
+
+      header,
+      .intro,
+      .profiles {
+        grid-template-columns: 1fr;
+      }
+
+      .stamp {
+        justify-self: start;
+        transform: rotate(-3deg);
+      }
+
+      .meta-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="watermark">КОМПРОМАТ</div>
+
+  <div class="dossier">
+    <header>
+      <div>
+        <div class="label">СОВЕРШЕННО СЕКРЕТНО / Top Secret Wedding Intelligence</div>
+
+        <h1>Операция<br />Kompromat</h1>
+
+        <p class="subtitle">
+          A classified archive of <strong>компромат</strong> — kompromat —
+          concerning the movements, memories, questionable decisions and
+          suspiciously romantic conduct of Joe and Simon.
+        </p>
+
+        <span class="cyrillic-note">
+          Личное дело: Джо + Саймон / Personal file: Joe + Simon
+        </span>
+      </div>
+
+      <div class="stamp">
+        Рассекречено<br />
+        Declassified<br />
+        For Guests
+      </div>
+    </header>
+
+    <section class="meta-strip">
+      <div class="meta">
+        <strong>Дело / Case file</strong>
+        WS-2026-КОМПРОМАТ
+      </div>
+
+      <div class="meta">
+        <strong>Объекты / Subjects</strong>
+        Joe & Simon
+      </div>
+
+      <div class="meta">
+        <strong>Допуск / Clearance</strong>
+        Wedding Party Only
+      </div>
+
+      <div class="meta">
+        <strong>Статус / Status</strong>
+        Deeply Compromised
+      </div>
+    </section>
+
+    <main>
+      <section class="intro">
+        <div class="typewritten">
+          <p>
+            This landing page serves as the central index for all relevant
+            wedding intelligence. Guests are advised to proceed through the
+            evidence carefully, laugh often, and report any suspiciously adorable
+            findings to the nearest champagne-bearing official.
+          </p>
+
+          <p>
+            Warning: some files may contain nostalgia, embarrassing outfits,
+            sentimental revelations, unlicensed dancing, and other forms of
+            romantic компромат.
+          </p>
+
+          <p>
+            Classification: <strong>Совершенно секретно</strong> — until the speeches.
+          </p>
+        </div>
+
+        <aside class="warning-box">
+          <h2>Оперативная сводка / Operational Briefing</h2>
+
+          <p>
+            Mission objective: review the available kompromat and determine how
+            Joe and Simon came to be so thoroughly implicated in love, laughter
+            and long-term co-conspiracy.
+          </p>
+
+          <p>
+            Secondary objectives include champagne, tears, dancing, and the
+            careful preservation of any further incriminating cuteness.
+          </p>
+        </aside>
+      </section>
+
+      <h2 class="section-title">Профили объектов / Subject Profiles</h2>
+
+      <section class="profiles">
+        <div class="profile">
+          <h3>Объект A: Joe</h3>
+          <ul>
+            <li>Known aliases: <span class="redacted">classified</span></li>
+            <li>Distinguishing traits: charm, wit, excellent judgement</li>
+            <li>Primary vulnerability: Simon</li>
+            <li>Relationship status: fully implicated</li>
+          </ul>
+        </div>
+
+        <div class="profile">
+          <h3>Объект B: Simon</h3>
+          <ul>
+            <li>Known aliases: <span class="redacted">classified</span></li>
+            <li>Distinguishing traits: style, humour, suspiciously lovable</li>
+            <li>Primary vulnerability: Joe</li>
+            <li>Relationship status: co-conspirator</li>
+          </ul>
+        </div>
+      </section>
+
+      <h2 class="section-title">Хранилище улик / Evidence Locker</h2>
+
+      <section class="grid">
+        <a class="file-card" href="story/index.html" data-code="ДЕЛО 001">
+          <div class="icon">📄</div>
+          <h3>Origin File</h3>
+          <p>
+            A chronological reconstruction of first contact, escalating affection
+            and the eventual formation of the Joe-Simon alliance.
+          </p>
+        </a>
+
+        <a class="file-card" href="photos/" data-code="ДЕЛО 002">
+          <div class="icon">🖼️</div>
+          <h3>Photographic Kompromat</h3>
+          <p>
+            Images documenting suspicious smiles, excellent outfits, holidays,
+            parties and repeated public displays of happiness.
+          </p>
+        </a>
+
+        <a class="file-card" href="videos/" data-code="ДЕЛО 003">
+          <div class="icon">🎞️</div>
+          <h3>Surveillance Footage</h3>
+          <p>
+            Video files recovered from phones, cameras and unreliable witnesses.
+            May contain dancing.
+          </p>
+        </a>
+
+        <a class="file-card" href="guest-testimony/index.html" data-code="ДЕЛО 004">
+          <div class="icon">🗣️</div>
+          <h3>Witness Statements</h3>
+          <p>
+            Friends and family provide testimony concerning romance, friendship,
+            excellent hosting and other suspicious behaviour.
+          </p>
+        </a>
+
+        <a class="file-card" href="timeline/index.html" data-code="ДЕЛО 005">
+          <div class="icon">🧭</div>
+          <h3>Timeline of Events</h3>
+          <p>
+            A mapped sequence of significant incidents, emotional escalation and
+            documented co-conspiracy.
+          </p>
+        </a>
+
+        <a class="file-card" href="wedding-day/index.html" data-code="ДЕЛО 006">
+          <div class="icon">💍</div>
+          <h3>Final Operation</h3>
+          <p>
+            Schedule, locations, guest instructions and highly sensitive
+            dancefloor protocols for the day of union.
+          </p>
+        </a>
+      </section>
+
+      <h2 class="section-title">Ограниченный архив / Restricted Archives</h2>
+
+      <section class="grid">
+        <a class="file-card" href="childhood/" data-code="АРХИВ A">
+          <div class="icon">🕵️</div>
+          <h3>Early Intelligence</h3>
+          <p>
+            Childhood photos, early clues and formative evidence from before the
+            subjects joined forces.
+          </p>
+        </a>
+
+        <a class="file-card" href="holidays/" data-code="АРХИВ B">
+          <div class="icon">🧳</div>
+          <h3>Foreign Operations</h3>
+          <p>
+            Travel reports, holiday images and international incidents of
+            loveliness.
+          </p>
+        </a>
+
+        <a class="file-card" href="party/" data-code="АРХИВ C">
+          <div class="icon">🥂</div>
+          <h3>Reception Files</h3>
+          <p>
+            Party plans, playlists, menus, speeches and other highly sensitive
+            celebration materials.
+          </p>
+        </a>
+      </section>
+
+      <div class="case-note">
+        <strong>Analyst note:</strong>
+        The evidence collected in this dossier strongly suggests that Joe and
+        Simon have been engaged in a long-running campaign of affection,
+        loyalty, laughter and mutual adoration. Further investigation is
+        recommended, preferably on the dancefloor.
+      </div>
+    </main>
+
+    <footer>
+      <span>Архив свадебной разведки / Wedding Intelligence Archive</span>
+      <span>Unauthorised seriousness strictly prohibited</span>
+    </footer>
+  </div>
+</body>
+</html>
