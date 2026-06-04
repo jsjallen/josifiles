@@ -3,565 +3,1016 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Операция Kompromat: Joe & Simon</title>
+  <title>Classified Briefing: Joe & Simon</title>
 
   <style>
     :root {
-      --paper: #f4ecd8;
-      --paper-dark: #d8ccb3;
-      --ink: #1d1b16;
-      --red: #9b1c1c;
-      --stamp: #b00000;
-      --green: #24352b;
-      --line: rgba(29, 27, 22, 0.22);
+      --navy: #06182f;
+      --navy-2: #0d294b;
+      --navy-3: #153a63;
+      --red: #b11226;
+      --gold: #b89b5e;
+      --paper: #f7f4ec;
+      --paper-2: #ebe5d8;
+      --ink: #151515;
+      --muted: #5d6773;
+      --line: #c9c1b4;
+      --white: #ffffff;
+      --green: #1f4d3a;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: "Courier New", Courier, monospace;
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,0.18), transparent 35%),
-        linear-gradient(135deg, #1c211d, #080a08);
+      font-family: Georgia, "Times New Roman", serif;
       color: var(--ink);
-      min-height: 100vh;
-      padding: 32px;
-    }
-
-    .watermark {
-      position: fixed;
-      inset: auto 5vw 8vh auto;
-      z-index: 0;
-      font-size: clamp(3rem, 10vw, 9rem);
-      color: rgba(155, 28, 28, 0.08);
-      font-weight: bold;
-      transform: rotate(-18deg);
-      pointer-events: none;
-      text-transform: uppercase;
-    }
-
-    .dossier {
-      max-width: 1200px;
-      margin: 0 auto;
       background:
-        linear-gradient(rgba(255,255,255,0.18), rgba(255,255,255,0.05)),
-        var(--paper);
-      border: 1px solid #796f5d;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.55);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
+        linear-gradient(rgba(6, 24, 47, 0.94), rgba(6, 24, 47, 0.97)),
+        repeating-linear-gradient(
+          45deg,
+          rgba(255,255,255,0.035) 0,
+          rgba(255,255,255,0.035) 1px,
+          transparent 1px,
+          transparent 12px
+        );
+      min-height: 100vh;
     }
 
-    .dossier::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 32px 32px;
-      opacity: 0.13;
-      pointer-events: none;
+    a {
+      color: inherit;
     }
 
-    header {
-      position: relative;
-      padding: 34px;
-      border-bottom: 3px double var(--ink);
+    .gov-bar {
+      background: #000;
+      color: #fff;
+      padding: 8px 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2px;
+    }
+
+    .gov-bar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .crest-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .crest-icon {
+      width: 24px;
+      height: 24px;
+      border: 1px solid #fff;
+      display: inline-grid;
+      place-items: center;
+      font-size: 0.72rem;
+      letter-spacing: 0;
+    }
+
+    .site-header {
+      background:
+        radial-gradient(circle at top right, rgba(184,155,94,0.18), transparent 32%),
+        var(--navy);
+      color: #fff;
+      border-bottom: 4px solid var(--red);
+    }
+
+    .site-header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 24px 36px;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: start;
+      gap: 28px;
+      align-items: center;
     }
 
-    .label {
-      display: inline-block;
-      border: 2px solid var(--red);
-      color: var(--red);
-      padding: 6px 10px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      transform: rotate(-2deg);
-      margin-bottom: 18px;
+    .department {
+      font-family: Arial, Helvetica, sans-serif;
       text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-size: 0.78rem;
+      color: #d6dde8;
+      margin-bottom: 14px;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.1rem, 5vw, 4.8rem);
-      line-height: 0.95;
-      text-transform: uppercase;
-      letter-spacing: -2px;
+      font-size: clamp(2.1rem, 5vw, 4.9rem);
+      line-height: 0.94;
+      letter-spacing: -1px;
+      font-weight: 700;
     }
 
-    .subtitle {
-      margin-top: 16px;
-      max-width: 720px;
-      font-size: 1rem;
-      line-height: 1.5;
+    .header-summary {
+      margin: 18px 0 0;
+      max-width: 790px;
+      color: #e6ecf5;
+      font-size: 1.05rem;
+      line-height: 1.55;
     }
 
-    .cyrillic-note {
-      display: inline-block;
-      margin-top: 12px;
-      border-top: 1px solid rgba(29, 27, 22, 0.35);
-      padding-top: 10px;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .stamp {
-      border: 5px solid var(--stamp);
-      color: var(--stamp);
+    .classification-stamp {
+      border: 3px solid #fff;
       padding: 18px 22px;
+      min-width: 230px;
       text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
       text-transform: uppercase;
-      font-size: 1.35rem;
-      font-weight: bold;
-      transform: rotate(7deg);
-      opacity: 0.88;
-      align-self: center;
-      line-height: 1.15;
+      letter-spacing: 2px;
+      transform: rotate(2deg);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3);
     }
 
-    .meta-strip {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-bottom: 1px solid var(--ink);
-      background: rgba(255,255,255,0.2);
+    .classification-stamp strong {
+      display: block;
+      font-size: 1.45rem;
+      margin-bottom: 6px;
     }
 
-    .meta {
-      padding: 14px 18px;
-      border-right: 1px solid var(--line);
+    .classification-stamp span {
+      display: block;
+      font-size: 0.76rem;
+      color: #d6dde8;
+      line-height: 1.4;
+    }
+
+    .nav-strip {
+      background: var(--navy-2);
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      font-family: Arial, Helvetica, sans-serif;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav-strip-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+
+    .nav-strip a {
+      display: block;
+      padding: 13px 16px;
+      text-decoration: none;
+      border-right: 1px solid rgba(255,255,255,0.14);
+      white-space: nowrap;
       font-size: 0.9rem;
     }
 
-    .meta:last-child {
+    .nav-strip a:first-child {
+      border-left: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .nav-strip a:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 34px auto;
+      padding: 0 24px;
+    }
+
+    .case-shell {
+      background: var(--paper);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.42);
+      border: 1px solid rgba(255,255,255,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-shell::before {
+      content: "CLASSIFIED BRIEFING";
+      position: absolute;
+      right: 28px;
+      top: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      color: rgba(177,18,38,0.22);
+      border: 2px solid rgba(177,18,38,0.18);
+      padding: 8px 12px;
+      transform: rotate(4deg);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .case-shell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(6,24,47,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(6,24,47,0.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .case-meta,
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .case-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-2);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .case-meta div {
+      padding: 16px 18px;
+      border-right: 1px solid var(--line);
+      min-height: 82px;
+    }
+
+    .case-meta div:last-child {
       border-right: 0;
     }
 
-    .meta strong {
+    .case-meta strong {
       display: block;
-      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      opacity: 0.75;
-      margin-bottom: 4px;
+      font-size: 0.72rem;
+      letter-spacing: 1.3px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .case-meta span {
+      font-weight: 700;
+      color: var(--navy);
     }
 
     main {
-      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 34px;
       padding: 34px;
     }
 
-    .intro {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 30px;
-      margin-bottom: 34px;
+    .notice {
+      border-left: 6px solid var(--red);
+      background: #fff;
+      padding: 22px 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04);
     }
 
-    .typewritten {
-      border-left: 5px solid var(--ink);
-      padding-left: 18px;
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
-
-    .warning-box {
-      background: var(--green);
-      color: #f4ecd8;
-      padding: 22px;
-      border: 2px solid #0e1712;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.08);
-    }
-
-    .warning-box h2 {
-      margin-top: 0;
+    .notice h2 {
+      margin: 0 0 10px;
+      font-family: Arial, Helvetica, sans-serif;
       text-transform: uppercase;
-      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      font-size: 0.95rem;
+      color: var(--red);
+    }
+
+    .notice p {
+      margin: 0 0 14px;
+      line-height: 1.65;
+      font-size: 1.02rem;
+    }
+
+    .notice p:last-child {
+      margin-bottom: 0;
     }
 
     .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-size: 0.95rem;
+      color: var(--navy);
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 10px;
       margin: 34px 0 18px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 1.15rem;
     }
 
-    .section-title::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: var(--ink);
-      opacity: 0.35;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .file-card {
-      display: block;
-      color: inherit;
-      text-decoration: none;
-      background: rgba(255,255,255,0.35);
-      border: 1px solid rgba(29,27,22,0.42);
-      padding: 20px;
-      min-height: 180px;
-      position: relative;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
-
-    .file-card:hover {
-      transform: translateY(-4px) rotate(-0.5deg);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.22);
-      background: rgba(255,255,255,0.55);
-    }
-
-    .file-card::before {
-      content: attr(data-code);
-      position: absolute;
-      top: 12px;
-      right: 14px;
-      font-size: 0.75rem;
-      opacity: 0.5;
-    }
-
-    .file-card .icon {
-      font-size: 2rem;
-      margin-bottom: 22px;
-    }
-
-    .file-card h3 {
-      margin: 0 0 10px;
-      text-transform: uppercase;
-      font-size: 1.1rem;
-    }
-
-    .file-card p {
-      margin: 0;
-      font-size: 0.9rem;
-      line-height: 1.45;
-    }
-
-    .redacted {
-      background: #111;
-      color: transparent;
-      padding: 0 4px;
-      user-select: none;
-    }
-
-    .profiles {
+    .file-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
     }
 
-    .profile {
-      border: 1px solid var(--ink);
+    .file-card {
+      display: block;
+      background: #fff;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      min-height: 220px;
       padding: 20px;
-      background: rgba(255,255,255,0.25);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .profile h3 {
-      margin: 0 0 12px;
+    .file-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 26px rgba(7,27,54,0.18);
+    }
+
+    .file-card::before {
+      content: attr(data-file);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--navy);
+      color: #fff;
+      padding: 7px 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
-      font-size: 1.4rem;
     }
 
-    .profile ul {
+    .file-card h3 {
+      margin: 38px 0 10px;
+      color: var(--navy);
+      font-size: 1.35rem;
+    }
+
+    .file-card p {
       margin: 0;
-      padding-left: 18px;
-      line-height: 1.7;
+      line-height: 1.55;
+      color: #323232;
     }
 
-    .case-note {
-      margin-top: 34px;
-      padding: 20px;
-      border: 2px dashed rgba(29, 27, 22, 0.45);
-      background: rgba(255,255,255,0.22);
-      line-height: 1.6;
-    }
-
-    .case-note strong {
+    .file-type {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
       color: var(--red);
+      font-size: 0.8rem;
+      letter-spacing: 1px;
       text-transform: uppercase;
+    }
+
+    .article-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .article-link {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 16px;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .article-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(7,27,54,0.14);
+    }
+
+    .article-code {
+      background: var(--red);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 7px 9px;
+      white-space: nowrap;
+    }
+
+    .article-link h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 1.2rem;
+    }
+
+    .article-link p {
+      margin: 0;
+      line-height: 1.45;
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .sidebar {
+      border-left: 1px solid var(--line);
+      padding-left: 26px;
+    }
+
+    .side-panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .side-panel h2 {
+      margin: 0;
+      background: var(--navy);
+      color: #fff;
+      padding: 12px 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-size: 0.82rem;
+    }
+
+    .side-panel-content {
+      padding: 16px;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .status-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .status-list li {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .status-list li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .status-list strong {
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.72rem;
+      margin-bottom: 4px;
+    }
+
+    .seal {
+      width: 134px;
+      height: 134px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      margin: 0 auto 18px;
+      color: var(--navy);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      position: relative;
+    }
+
+    .seal::before {
+      content: "✦";
+      font-size: 2rem;
+      display: block;
+      color: var(--red);
+      position: absolute;
+      top: 24px;
+    }
+
+    .seal span {
+      display: block;
+      margin-top: 28px;
+      max-width: 94px;
+    }
+
+    .quote {
+      font-style: italic;
+      border-left: 3px solid var(--gold);
+      padding-left: 14px;
+      margin: 0;
+    }
+
+    .redacted {
+      background: #111;
+      color: transparent;
+      padding: 0 5px;
+      user-select: none;
+    }
+
+    .final-note {
+      background: var(--navy);
+      color: #fff;
+      padding: 24px;
+      margin-top: 26px;
+      border-top: 4px solid var(--red);
+    }
+
+    .final-note h2 {
+      margin: 0 0 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-size: 0.95rem;
+    }
+
+    .final-note p {
+      margin: 0;
+      line-height: 1.65;
+      color: #e8edf5;
+    }
+
+    .clearance-badge {
+      display: inline-block;
+      margin-top: 12px;
+      background: var(--green);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.72rem;
+      padding: 7px 9px;
     }
 
     footer {
-      position: relative;
-      padding: 22px 34px;
-      border-top: 1px solid var(--ink);
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      font-size: 0.85rem;
-      background: rgba(255,255,255,0.2);
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 36px;
+      color: rgba(255,255,255,0.75);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.5;
     }
 
-    @media (max-width: 850px) {
-      body {
-        padding: 12px;
+    footer p {
+      margin: 12px 0 0;
+    }
+
+    @media (max-width: 930px) {
+      .site-header-inner,
+      main {
+        grid-template-columns: 1fr;
       }
 
-      header,
-      main,
-      footer {
+      .classification-stamp {
+        justify-self: start;
+      }
+
+      .sidebar {
+        border-left: 0;
+        padding-left: 0;
+      }
+
+      .case-meta {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .gov-bar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .file-grid,
+      .case-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        margin: 18px auto;
+        padding: 0 12px;
+      }
+
+      main {
         padding: 22px;
       }
 
-      header,
-      .intro,
-      .profiles {
+      .site-header-inner {
+        padding: 24px 18px;
+      }
+
+      .nav-strip-inner {
+        padding: 0 12px;
+      }
+
+      .article-link {
         grid-template-columns: 1fr;
-      }
-
-      .stamp {
-        justify-self: start;
-        transform: rotate(-3deg);
-      }
-
-      .meta-strip {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        flex-direction: column;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="watermark">КОМПРОМАТ</div>
-
-  <div class="dossier">
-    <header>
-      <div>
-        <div class="label">СОВЕРШЕННО СЕКРЕТНО / Top Secret Wedding Intelligence</div>
-
-        <h1>Операция<br />Kompromat</h1>
-
-        <p class="subtitle">
-          A classified archive of <strong>компромат</strong> — kompromat —
-          concerning the movements, memories, questionable decisions and
-          suspiciously romantic conduct of Joe and Simon.
-        </p>
-
-        <span class="cyrillic-note">
-          Личное дело: Джо + Саймон / Personal file: Joe + Simon
-        </span>
+  <div class="gov-bar">
+    <div class="gov-bar-inner">
+      <div class="crest-mark">
+        <span class="crest-icon">JW</span>
+        Joint Wedding Intelligence Committee
       </div>
-
-      <div class="stamp">
-        Рассекречено<br />
-        Declassified<br />
-        For Guests
-      </div>
-    </header>
-
-    <section class="meta-strip">
-      <div class="meta">
-        <strong>Дело / Case file</strong>
-        WS-2026-КОМПРОМАТ
-      </div>
-
-      <div class="meta">
-        <strong>Объекты / Subjects</strong>
-        Joe & Simon
-      </div>
-
-      <div class="meta">
-        <strong>Допуск / Clearance</strong>
-        Wedding Party Only
-      </div>
-
-      <div class="meta">
-        <strong>Статус / Status</strong>
-        Deeply Compromised
-      </div>
-    </section>
-
-    <main>
-      <section class="intro">
-        <div class="typewritten">
-          <p>
-            This landing page serves as the central index for all relevant
-            wedding intelligence. Guests are advised to proceed through the
-            evidence carefully, laugh often, and report any suspiciously adorable
-            findings to the nearest champagne-bearing official.
-          </p>
-
-          <p>
-            Warning: some files may contain nostalgia, embarrassing outfits,
-            sentimental revelations, unlicensed dancing, and other forms of
-            romantic компромат.
-          </p>
-
-          <p>
-            Classification: <strong>Совершенно секретно</strong> — until the speeches.
-          </p>
-        </div>
-
-        <aside class="warning-box">
-          <h2>Оперативная сводка / Operational Briefing</h2>
-
-          <p>
-            Mission objective: review the available kompromat and determine how
-            Joe and Simon came to be so thoroughly implicated in love, laughter
-            and long-term co-conspiracy.
-          </p>
-
-          <p>
-            Secondary objectives include champagne, tears, dancing, and the
-            careful preservation of any further incriminating cuteness.
-          </p>
-        </aside>
-      </section>
-
-      <h2 class="section-title">Профили объектов / Subject Profiles</h2>
-
-      <section class="profiles">
-        <div class="profile">
-          <h3>Объект A: Joe</h3>
-          <ul>
-            <li>Known aliases: <span class="redacted">classified</span></li>
-            <li>Distinguishing traits: charm, wit, excellent judgement</li>
-            <li>Primary vulnerability: Simon</li>
-            <li>Relationship status: fully implicated</li>
-          </ul>
-        </div>
-
-        <div class="profile">
-          <h3>Объект B: Simon</h3>
-          <ul>
-            <li>Known aliases: <span class="redacted">classified</span></li>
-            <li>Distinguishing traits: style, humour, suspiciously lovable</li>
-            <li>Primary vulnerability: Joe</li>
-            <li>Relationship status: co-conspirator</li>
-          </ul>
-        </div>
-      </section>
-
-      <h2 class="section-title">Хранилище улик / Evidence Locker</h2>
-
-      <section class="grid">
-        <a class="file-card" href="story/index.html" data-code="ДЕЛО 001">
-          <div class="icon">📄</div>
-          <h3>Origin File</h3>
-          <p>
-            A chronological reconstruction of first contact, escalating affection
-            and the eventual formation of the Joe-Simon alliance.
-          </p>
-        </a>
-
-        <a class="file-card" href="photos/" data-code="ДЕЛО 002">
-          <div class="icon">🖼️</div>
-          <h3>Photographic Kompromat</h3>
-          <p>
-            Images documenting suspicious smiles, excellent outfits, holidays,
-            parties and repeated public displays of happiness.
-          </p>
-        </a>
-
-        <a class="file-card" href="videos/" data-code="ДЕЛО 003">
-          <div class="icon">🎞️</div>
-          <h3>Surveillance Footage</h3>
-          <p>
-            Video files recovered from phones, cameras and unreliable witnesses.
-            May contain dancing.
-          </p>
-        </a>
-
-        <a class="file-card" href="guest-testimony/index.html" data-code="ДЕЛО 004">
-          <div class="icon">🗣️</div>
-          <h3>Witness Statements</h3>
-          <p>
-            Friends and family provide testimony concerning romance, friendship,
-            excellent hosting and other suspicious behaviour.
-          </p>
-        </a>
-
-        <a class="file-card" href="timeline/index.html" data-code="ДЕЛО 005">
-          <div class="icon">🧭</div>
-          <h3>Timeline of Events</h3>
-          <p>
-            A mapped sequence of significant incidents, emotional escalation and
-            documented co-conspiracy.
-          </p>
-        </a>
-
-        <a class="file-card" href="wedding-day/index.html" data-code="ДЕЛО 006">
-          <div class="icon">💍</div>
-          <h3>Final Operation</h3>
-          <p>
-            Schedule, locations, guest instructions and highly sensitive
-            dancefloor protocols for the day of union.
-          </p>
-        </a>
-      </section>
-
-      <h2 class="section-title">Ограниченный архив / Restricted Archives</h2>
-
-      <section class="grid">
-        <a class="file-card" href="childhood/" data-code="АРХИВ A">
-          <div class="icon">🕵️</div>
-          <h3>Early Intelligence</h3>
-          <p>
-            Childhood photos, early clues and formative evidence from before the
-            subjects joined forces.
-          </p>
-        </a>
-
-        <a class="file-card" href="holidays/" data-code="АРХИВ B">
-          <div class="icon">🧳</div>
-          <h3>Foreign Operations</h3>
-          <p>
-            Travel reports, holiday images and international incidents of
-            loveliness.
-          </p>
-        </a>
-
-        <a class="file-card" href="party/" data-code="АРХИВ C">
-          <div class="icon">🥂</div>
-          <h3>Reception Files</h3>
-          <p>
-            Party plans, playlists, menus, speeches and other highly sensitive
-            celebration materials.
-          </p>
-        </a>
-      </section>
-
-      <div class="case-note">
-        <strong>Analyst note:</strong>
-        The evidence collected in this dossier strongly suggests that Joe and
-        Simon have been engaged in a long-running campaign of affection,
-        loyalty, laughter and mutual adoration. Further investigation is
-        recommended, preferably on the dancefloor.
-      </div>
-    </main>
-
-    <footer>
-      <span>Архив свадебной разведки / Wedding Intelligence Archive</span>
-      <span>Unauthorised seriousness strictly prohibited</span>
-    </footer>
+      <div>Classified briefing | Guest clearance required</div>
+    </div>
   </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div>
+        <div class="department">Wedding Intelligence Service</div>
+
+        <h1>Classified Briefing:<br />Joe & Simon</h1>
+
+        <p class="header-summary">
+          A restricted dossier prepared to assess the suitability of the named
+          subjects for married life. This archive contains background material,
+          witness intelligence, photographic evidence, behavioural analysis,
+          communications records and other classified findings.
+        </p>
+      </div>
+
+      <div class="classification-stamp">
+        <strong>Vetted</strong>
+        <span>For married life</span>
+        <span>Guest access authorised</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-strip">
+    <div class="nav-strip-inner">
+      <a href="#briefing">Briefing</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#associates">Associates</a>
+      <a href="#testing">Testing</a>
+      <a href="#clippings">Clippings</a>
+      <a href="#surveillance">Surveillance</a>
+      <a href="#interrogations">Interrogations</a>
+      <a href="#communications">Communications</a>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="case-shell">
+      <section class="case-meta">
+        <div>
+          <strong>Reference</strong>
+          <span>JWIC/LOVE/VETTING/001</span>
+        </div>
+
+        <div>
+          <strong>Subjects</strong>
+          <span>Joe Allen & Simon</span>
+        </div>
+
+        <div>
+          <strong>Classification</strong>
+          <span>Secret: Wedding Eyes Only</span>
+        </div>
+
+        <div>
+          <strong>Recommendation</strong>
+          <span>Approved for Marriage</span>
+        </div>
+      </section>
+
+      <main>
+        <section>
+          <div class="notice" id="briefing">
+            <h2>Director’s Introduction</h2>
+
+            <p>
+              This site is a formal dossier of information compiled on Joe and
+              Simon in advance of their wedding. Its purpose is to vet both
+              subjects for married life through careful review of their history,
+              associates, communications, emotional stability, public behaviour
+              and capacity for long-term co-operation.
+            </p>
+
+            <p>
+              The material has been prepared in the style of a classified
+              briefing and should be handled accordingly. Guests are invited to
+              review the evidence, assess the findings, and determine whether
+              the couple are fit to proceed to matrimony.
+            </p>
+
+            <span class="clearance-badge">Preliminary finding: highly compatible</span>
+          </div>
+
+          <h2 class="section-title" id="timeline">Timeline of Events</h2>
+
+          <section class="file-grid">
+            <a class="file-card" href="timeline/index.html" data-file="File 01 / Chronology of contact">
+              <h3>How Simon and Joe Met</h3>
+              <p>
+                A reconstructed timeline detailing the first known contact
+                between the subjects, the early signs of mutual interest, and
+                the sequence of events that led to the current wedding operation.
+              </p>
+              <span class="file-type">Timeline</span>
+            </a>
+
+            <a class="file-card" href="story/index.html" data-file="File 02 / Relationship development">
+              <h3>Relationship History</h3>
+              <p>
+                Supporting background material covering the development of the
+                relationship, key milestones, suspiciously romantic behaviour and
+                the gradual escalation towards marriage.
+              </p>
+              <span class="file-type">Briefing</span>
+            </a>
+          </section>
+
+          <h2 class="section-title" id="associates">Known Associates</h2>
+
+          <section class="file-grid">
+            <a class="file-card" href="known-associates/index.html" data-file="File 03 / Wedding party intelligence">
+              <h3>Wedding Party Register</h3>
+              <p>
+                A classified index of known associates in the wedding party,
+                including compromising photographs, suspicious alliances and
+                relevant background intelligence.
+              </p>
+              <span class="file-type">Profiles</span>
+            </a>
+
+            <a class="file-card" href="known-associates/photos.html" data-file="File 04 / Compromising images">
+              <h3>Associate Photo Evidence</h3>
+              <p>
+                Photographic records of key witnesses, accomplices and
+                co-conspirators. Material may include questionable outfits,
+                dancefloor evidence and historic incidents.
+              </p>
+              <span class="file-type">Images</span>
+            </a>
+          </section>
+
+          <h2 class="section-title" id="testing">Compatibility Testing</h2>
+
+          <section class="file-grid">
+            <a class="file-card" href="compatibility-testing/index.html" data-file="File 05 / Statistical analysis">
+              <h3>Couple Performance Data</h3>
+              <p>
+                A highly scientific and in no way ridiculous collection of
+                graphs, statistics, charts and behavioural indicators designed
+                to test the couple’s readiness for married life.
+              </p>
+              <span class="file-type">Graphs</span>
+            </a>
+
+            <a class="file-card" href="compatibility-testing/results.html" data-file="File 06 / Findings and conclusions">
+              <h3>Compatibility Results</h3>
+              <p>
+                Final analytical outputs covering romance levels, bickering
+                resilience, shared silliness, sofa compatibility and long-term
+                partnership risk.
+              </p>
+              <span class="file-type">Analysis</span>
+            </a>
+          </section>
+
+          <h2 class="section-title" id="clippings">News Clippings</h2>
+
+          <section class="article-list">
+            <a class="article-link" href="news-clippings/gnome-incident.html">
+              <span class="article-code">Article 01</span>
+              <div>
+                <h3>The Gnome Incident</h3>
+                <p>
+                  A troubling report concerning garden statuary, unexplained
+                  activity and the subjects’ possible involvement.
+                </p>
+              </div>
+            </a>
+
+            <a class="article-link" href="news-clippings/landrover-theft.html">
+              <span class="article-code">Article 02</span>
+              <div>
+                <h3>The Landrover Theft</h3>
+                <p>
+                  A reconstructed account of an alleged vehicle-related incident
+                  requiring urgent archival review.
+                </p>
+              </div>
+            </a>
+
+            <a class="article-link" href="news-clippings/mz-lee-inc.html">
+              <span class="article-code">Article 03</span>
+              <div>
+                <h3>Mz Lee Inc</h3>
+                <p>
+                  Corporate filings, personality cult analysis and unexplained
+                  expansion activity connected to Mz Lee Inc.
+                </p>
+              </div>
+            </a>
+
+            <a class="article-link" href="news-clippings/simons-musical-career.html">
+              <span class="article-code">Article 04</span>
+              <div>
+                <h3>Simon’s Musical Career</h3>
+                <p>
+                  A special investigation into artistic output, performance
+                  history and the cultural significance of Simon’s musical era.
+                </p>
+              </div>
+            </a>
+          </section>
+
+          <h2 class="section-title" id="surveillance">Surveillance Images</h2>
+
+          <section class="file-grid">
+            <a class="file-card" href="surveillance-images/index.html" data-file="File 07 / Venue observation records">
+              <h3>Fourteen Venue Files</h3>
+              <p>
+                A photographic surveillance archive showing Joe and Simon in the
+                fourteen different venues after which the wedding tables have
+                been named.
+              </p>
+              <span class="file-type">Photo archive</span>
+            </a>
+
+            <a class="file-card" href="surveillance-images/table-names.html" data-file="File 08 / Table name cross-reference">
+              <h3>Table Name Index</h3>
+              <p>
+                Cross-referenced location intelligence connecting each table
+                name to the relevant venue, memory, photograph and operational
+                significance.
+              </p>
+              <span class="file-type">Index</span>
+            </a>
+          </section>
+
+          <h2 class="section-title" id="interrogations">Interrogations</h2>
+
+          <section class="file-grid">
+            <a class="file-card" href="interrogations/index.html" data-file="File 09 / Recorded testimony">
+              <h3>Mr & Mr Video Evidence</h3>
+              <p>
+                Recorded interrogation clips from both Mr & Mr videos. Subjects
+                are advised that inconsistencies, evasive answers and excessive
+                laughter may be used in evidence.
+              </p>
+              <span class="file-type">Video</span>
+            </a>
+
+            <a class="file-card" href="interrogations/transcripts.html" data-file="File 10 / Interview transcripts">
+              <h3>Interview Transcripts</h3>
+              <p>
+                Written records of questioning, answers, contradictions,
+                revelations and other material of interest to the committee.
+              </p>
+              <span class="file-type">Transcript</span>
+            </a>
+          </section>
+
+          <h2 class="section-title" id="communications">Declassified Communications</h2>
+
+          <section class="file-grid">
+            <a class="file-card" href="declassified-communications/index.html" data-file="File 11 / Message archive">
+              <h3>WhatsApp Records</h3>
+              <p>
+                A declassified selection of WhatsApp communications between Joe
+                and Simon, with sensitive details redacted in accordance with
+                wedding intelligence handling procedures.
+              </p>
+              <span class="file-type">Messages</span>
+            </a>
+
+            <a class="file-card" href="declassified-communications/redacted.html" data-file="File 12 / Redacted materials">
+              <h3>Redacted Extracts</h3>
+              <p>
+                Extracted communications featuring black-bar redactions,
+                suspicious affection, logistical planning and material too
+                classified for general release.
+              </p>
+              <span class="file-type">Redacted</span>
+            </a>
+          </section>
+
+          <div class="final-note">
+            <h2>Final Vetting Assessment</h2>
+            <p>
+              Having reviewed the available evidence, the committee finds that
+              Joe and Simon demonstrate unusually high levels of compatibility,
+              affection, resilience, humour and mutual incrimination. The
+              recommendation is therefore clear: the subjects are approved for
+              married life with immediate effect.
+            </p>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <div class="side-panel">
+            <h2>Access Authorisation</h2>
+            <div class="side-panel-content">
+              <div class="seal">
+                <span>Wedding Guest Clearance</span>
+              </div>
+
+              <p>
+                Access to this dossier is granted for approved guests only.
+                Material should be reviewed with discretion, fondness and a
+                suitable drink in hand.
+              </p>
+            </div>
+          </div>
+
+          <div class="side-panel">
+            <h2>Operational Status</h2>
+            <div class="side-panel-content">
+              <ul class="status-list">
+                <li>
+                  <strong>Operation</strong>
+                  Marriage vetting and final approval
+                </li>
+                <li>
+                  <strong>Subjects</strong>
+                  Joe and Simon
+                </li>
+                <li>
+                  <strong>Risk level</strong>
+                  High probability of happy tears
+                </li>
+                <li>
+                  <strong>Evidence type</strong>
+                  Photos, videos, messages, testimony
+                </li>
+                <li>
+                  <strong>Primary threat</strong>
+                  Excessive joy
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="side-panel">
+            <h2>Handling Instructions</h2>
+            <div class="side-panel-content">
+              <p>
+                Treat all materials as classified. Do not share beyond
+                authorised wedding guests. Laugh generously. Cry discreetly.
+                Dance when instructed.
+              </p>
+            </div>
+          </div>
+
+          <div class="side-panel">
+            <h2>Analyst Note</h2>
+            <div class="side-panel-content">
+              <p class="quote">
+                “The evidence is conclusive. Both subjects appear fully prepared
+                for married life, pending final ceremonial confirmation.”
+              </p>
+            </div>
+          </div>
+
+          <div class="side-panel">
+            <h2>Redaction Notice</h2>
+            <div class="side-panel-content">
+              <p>
+                Certain details have been withheld to protect national security,
+                wedding speeches and the dignity of those involved.
+              </p>
+
+              <p>
+                Status: <span class="redacted">classified</span>
+              </p>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      Fictional classified wedding briefing prepared for celebratory purposes.
+      This site is not affiliated with, endorsed by or representative of any real
+      UK government department, agency or intelligence service.
+    </p>
+  </footer>
 </body>
 </html>
