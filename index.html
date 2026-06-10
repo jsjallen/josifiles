@@ -1,1018 +1,278 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Classified Briefing: Joe & Simon</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bonus Content</title>
   <style>
     :root {
-      --navy: #06182f;
-      --navy-2: #0d294b;
-      --navy-3: #153a63;
-      --red: #b11226;
-      --gold: #b89b5e;
-      --paper: #f7f4ec;
-      --paper-2: #ebe5d8;
-      --ink: #151515;
-      --muted: #5d6773;
-      --line: #c9c1b4;
-      --white: #ffffff;
-      --green: #1f4d3a;
+      --gold: #f4d57b;
+      --deep-gold: #a87622;
+      --blue: #051c45;
+      --blue2: #123a73;
+      --glow: rgba(255, 224, 135, 0.9);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--ink);
-      background:
-        linear-gradient(rgba(6, 24, 47, 0.94), rgba(6, 24, 47, 0.97)),
-        repeating-linear-gradient(
-          45deg,
-          rgba(255,255,255,0.035) 0,
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px,
-          transparent 12px
-        );
       min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .gov-bar {
-      background: #000;
-      color: #fff;
-      padding: 8px 24px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.2px;
-    }
-
-    .gov-bar-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: center;
-    }
-
-    .crest-mark {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-    }
-
-    .crest-icon {
-      width: 24px;
-      height: 24px;
-      border: 1px solid #fff;
-      display: inline-grid;
-      place-items: center;
-      font-size: 0.72rem;
-      letter-spacing: 0;
-    }
-
-    .site-header {
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--gold);
       background:
-        radial-gradient(circle at top right, rgba(184,155,94,0.18), transparent 32%),
-        var(--navy);
-      color: #fff;
-      border-bottom: 4px solid var(--red);
+        radial-gradient(circle at 50% 45%, rgba(42, 98, 167, 0.9) 0%, rgba(9, 39, 88, 0.98) 34%, #020711 76%),
+        linear-gradient(135deg, #000 0%, #071c45 50%, #000 100%);
+      overflow: hidden;
     }
 
-    .site-header-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 32px 24px 36px;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.045) 0,
+          rgba(255,255,255,0.045) 1px,
+          transparent 1px,
+          transparent 5px
+        );
+      mix-blend-mode: overlay;
+      opacity: 0.45;
+      animation: scan 8s linear infinite;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -8%;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.65) 82%);
+    }
+
+    @keyframes scan {
+      from { transform: translateY(-10px); }
+      to { transform: translateY(10px); }
+    }
+
+    .dvd-frame {
+      position: relative;
+      min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 28px;
-      align-items: center;
+      place-items: center;
+      padding: 24px;
     }
 
-    .department {
-      font-family: Arial, Helvetica, sans-serif;
+    .sparkle {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 14px 4px rgba(255,255,255,0.5);
+      opacity: 0.55;
+      animation: twinkle 3.5s infinite ease-in-out;
+    }
+
+    .sparkle:nth-child(1) { width: 3px; height: 3px; top: 16%; left: 18%; animation-delay: 0s; }
+    .sparkle:nth-child(2) { width: 2px; height: 2px; top: 24%; right: 21%; animation-delay: 1s; }
+    .sparkle:nth-child(3) { width: 4px; height: 4px; bottom: 19%; left: 24%; animation-delay: 1.8s; }
+    .sparkle:nth-child(4) { width: 2px; height: 2px; bottom: 29%; right: 18%; animation-delay: 2.4s; }
+
+    @keyframes twinkle {
+      0%, 100% { transform: scale(0.75); opacity: 0.25; }
+      50% { transform: scale(1.45); opacity: 0.8; }
+    }
+
+    .menu {
+      width: min(920px, 92vw);
+      min-height: min(680px, 86vh);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(28px, 6vw, 70px);
+      border: 4px double rgba(244, 213, 123, 0.8);
+      border-radius: 34px;
+      background:
+        linear-gradient(145deg, rgba(4, 12, 31, 0.62), rgba(14, 58, 119, 0.35)),
+        radial-gradient(circle at 50% 0%, rgba(255, 221, 130, 0.12), transparent 36%);
+      box-shadow:
+        0 0 46px rgba(0,0,0,0.9),
+        inset 0 0 40px rgba(244, 213, 123, 0.14),
+        inset 0 0 100px rgba(0,0,0,0.35);
+      isolation: isolate;
+    }
+
+    .menu::before,
+    .menu::after {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border-radius: 24px;
+      pointer-events: none;
+    }
+
+    .menu::before {
+      border: 1px solid rgba(244, 213, 123, 0.42);
+      box-shadow: inset 0 0 28px rgba(244, 213, 123, 0.1);
+    }
+
+    .menu::after {
+      background:
+        linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent),
+        linear-gradient(transparent, rgba(255,255,255,0.04), transparent);
+      transform: skewX(-12deg);
+      opacity: 0.55;
+      z-index: -1;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font: 700 clamp(0.82rem, 1.6vw, 1rem) Arial, Helvetica, sans-serif;
+      letter-spacing: 0.46em;
       text-transform: uppercase;
-      letter-spacing: 2.5px;
-      font-size: 0.78rem;
-      color: #d6dde8;
-      margin-bottom: 14px;
+      color: #f9e8ac;
+      text-shadow: 0 0 8px rgba(255, 226, 140, 0.75);
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(2.1rem, 5vw, 4.9rem);
-      line-height: 0.94;
-      letter-spacing: -1px;
-      font-weight: 700;
-    }
-
-    .header-summary {
-      margin: 18px 0 0;
-      max-width: 790px;
-      color: #e6ecf5;
-      font-size: 1.05rem;
-      line-height: 1.55;
-    }
-
-    .classification-stamp {
-      border: 3px solid #fff;
-      padding: 18px 22px;
-      min-width: 230px;
+      margin: 0 0 clamp(34px, 6vh, 58px);
+      font-size: clamp(3rem, 9vw, 7rem);
+      line-height: 0.82;
       text-align: center;
-      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      transform: rotate(2deg);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3);
+      color: var(--gold);
+      -webkit-text-stroke: 1px rgba(99, 55, 8, 0.7);
+      text-shadow:
+        0 3px 0 #6e3c0a,
+        0 8px 18px rgba(0,0,0,0.95),
+        0 0 24px rgba(255, 219, 118, 0.45);
     }
 
-    .classification-stamp strong {
+    nav {
+      width: min(590px, 100%);
+      display: grid;
+      gap: 13px;
+    }
+
+    .menu-link {
+      --shift: 0px;
+      position: relative;
       display: block;
-      font-size: 1.45rem;
-      margin-bottom: 6px;
-    }
-
-    .classification-stamp span {
-      display: block;
-      font-size: 0.76rem;
-      color: #d6dde8;
-      line-height: 1.4;
-    }
-
-    .nav-strip {
-      background: var(--navy-2);
-      color: #fff;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      font-family: Arial, Helvetica, sans-serif;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
-
-    .nav-strip-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
-    }
-
-    .nav-strip a {
-      display: block;
-      padding: 13px 16px;
+      padding: 15px 24px 15px 54px;
+      border-radius: 999px;
+      color: #ffe8a5;
       text-decoration: none;
-      border-right: 1px solid rgba(255,255,255,0.14);
-      white-space: nowrap;
-      font-size: 0.9rem;
-    }
-
-    .nav-strip a:first-child {
-      border-left: 1px solid rgba(255,255,255,0.14);
-    }
-
-    .nav-strip a:hover {
-      background: rgba(255,255,255,0.08);
-    }
-
-    .page {
-      max-width: 1180px;
-      margin: 34px auto;
-      padding: 0 24px;
-    }
-
-    .case-shell {
-      background: var(--paper);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.42);
-      border: 1px solid rgba(255,255,255,0.18);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .case-shell::before {
-      content: "CLASSIFIED BRIEFING";
-      position: absolute;
-      right: 28px;
-      top: 24px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      color: rgba(177,18,38,0.22);
-      border: 2px solid rgba(177,18,38,0.18);
-      padding: 8px 12px;
-      transform: rotate(4deg);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .case-shell::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(6,24,47,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(6,24,47,0.045) 1px, transparent 1px);
-      background-size: 34px 34px;
-      pointer-events: none;
-      opacity: 0.55;
-    }
-
-    .case-meta,
-    main {
-      position: relative;
-      z-index: 1;
-    }
-
-    .case-meta {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-bottom: 1px solid var(--line);
-      background: var(--paper-2);
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .case-meta div {
-      padding: 16px 18px;
-      border-right: 1px solid var(--line);
-      min-height: 82px;
-    }
-
-    .case-meta div:last-child {
-      border-right: 0;
-    }
-
-    .case-meta strong {
-      display: block;
+      font: 700 clamp(1.05rem, 2.6vw, 1.75rem) Arial, Helvetica, sans-serif;
+      letter-spacing: 0.045em;
       text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 1.3px;
-      color: var(--muted);
-      margin-bottom: 6px;
+      background: linear-gradient(90deg, rgba(255, 215, 112, 0.2), rgba(255, 215, 112, 0.04) 62%, transparent);
+      border: 1px solid rgba(244, 213, 123, 0.38);
+      box-shadow: inset 0 0 18px rgba(244, 213, 123, 0.08), 0 9px 18px rgba(0,0,0,0.32);
+      text-shadow: 0 2px 2px #000, 0 0 10px rgba(255, 225, 145, 0.38);
+      transform: translateX(var(--shift));
+      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease, color 180ms ease;
     }
 
-    .case-meta span {
-      font-weight: 700;
-      color: var(--navy);
-    }
+    .menu-link:nth-child(2) { --shift: 22px; }
+    .menu-link:nth-child(3) { --shift: -10px; }
+    .menu-link:nth-child(4) { --shift: 18px; }
+    .menu-link:nth-child(5) { --shift: -18px; }
 
-    main {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
-      gap: 34px;
-      padding: 34px;
-    }
-
-    .notice {
-      border-left: 6px solid var(--red);
-      background: #fff;
-      padding: 22px 24px;
-      margin-bottom: 30px;
-      box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-    }
-
-    .notice h2 {
-      margin: 0 0 10px;
-      font-family: Arial, Helvetica, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-size: 0.95rem;
-      color: var(--red);
-    }
-
-    .notice p {
-      margin: 0 0 14px;
-      line-height: 1.65;
-      font-size: 1.02rem;
-    }
-
-    .notice p:last-child {
-      margin-bottom: 0;
-    }
-
-    .section-title {
-      font-family: Arial, Helvetica, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1.8px;
-      font-size: 0.95rem;
-      color: var(--navy);
-      border-bottom: 2px solid var(--navy);
-      padding-bottom: 10px;
-      margin: 34px 0 18px;
-    }
-
-    .file-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .file-card {
-      display: block;
-      background: #fff;
-      border: 1px solid var(--line);
-      text-decoration: none;
-      min-height: 220px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .file-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 26px rgba(7,27,54,0.18);
-    }
-
-    .file-card::before {
-      content: attr(data-file);
+    .menu-link::before {
+      content: "▶";
       position: absolute;
-      top: 0;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8em;
+      color: #fff3c4;
+      opacity: 0;
+      text-shadow: 0 0 12px var(--glow);
+      transition: opacity 150ms ease, left 150ms ease;
+    }
+
+    .menu-link:hover,
+    .menu-link:focus-visible {
+      color: #fff8d9;
+      outline: none;
+      background: linear-gradient(90deg, rgba(244, 213, 123, 0.48), rgba(244, 213, 123, 0.13) 70%, transparent);
+      box-shadow:
+        inset 0 0 22px rgba(255, 238, 184, 0.24),
+        0 0 24px rgba(255, 219, 118, 0.42),
+        0 10px 20px rgba(0,0,0,0.42);
+      transform: translateX(calc(var(--shift) + 13px)) scale(1.025);
+    }
+
+    .menu-link:hover::before,
+    .menu-link:focus-visible::before {
+      opacity: 1;
+      left: 20px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 26px;
       left: 0;
       right: 0;
-      background: var(--navy);
-      color: #fff;
-      padding: 7px 12px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-    }
-
-    .file-card h3 {
-      margin: 38px 0 10px;
-      color: var(--navy);
-      font-size: 1.35rem;
-    }
-
-    .file-card p {
-      margin: 0;
-      line-height: 1.55;
-      color: #323232;
-    }
-
-    .file-type {
-      position: absolute;
-      right: 16px;
-      bottom: 14px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 700;
-      color: var(--red);
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .article-list {
-      display: grid;
-      gap: 14px;
-    }
-
-    .article-link {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 14px;
-      align-items: start;
-      background: #fff;
-      border: 1px solid var(--line);
-      padding: 16px;
-      text-decoration: none;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .article-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(7,27,54,0.14);
-    }
-
-    .article-code {
-      background: var(--red);
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 7px 9px;
-      white-space: nowrap;
-    }
-
-    .article-link h3 {
-      margin: 0 0 6px;
-      color: var(--navy);
-      font-size: 1.2rem;
-    }
-
-    .article-link p {
-      margin: 0;
-      line-height: 1.45;
-      color: #333;
-      font-size: 0.95rem;
-    }
-
-    .sidebar {
-      border-left: 1px solid var(--line);
-      padding-left: 26px;
-    }
-
-    .side-panel {
-      background: #fff;
-      border: 1px solid var(--line);
-      margin-bottom: 18px;
-    }
-
-    .side-panel h2 {
-      margin: 0;
-      background: var(--navy);
-      color: #fff;
-      padding: 12px 14px;
-      font-family: Arial, Helvetica, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      font-size: 0.82rem;
-    }
-
-    .side-panel-content {
-      padding: 16px;
-      font-size: 0.95rem;
-      line-height: 1.55;
-    }
-
-    .status-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 12px;
-    }
-
-    .status-list li {
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .status-list li:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .status-list strong {
-      display: block;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.72rem;
-      margin-bottom: 4px;
-    }
-
-    .seal {
-      width: 134px;
-      height: 134px;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
       text-align: center;
-      margin: 0 auto 18px;
-      color: var(--navy);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72rem;
+      font: 700 0.72rem Arial, Helvetica, sans-serif;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
-      letter-spacing: 1.4px;
-      position: relative;
+      color: rgba(255, 232, 165, 0.62);
+      text-shadow: 0 0 10px rgba(255, 232, 165, 0.45);
     }
 
-    .seal::before {
-      content: "✦";
-      font-size: 2rem;
-      display: block;
-      color: var(--red);
+    .disc {
       position: absolute;
-      top: 24px;
+      width: min(36vw, 265px);
+      aspect-ratio: 1;
+      right: max(-82px, -7vw);
+      bottom: max(-82px, -8vw);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, transparent 0 12%, rgba(255,255,255,0.8) 12.5% 14%, transparent 14.5% 100%),
+        conic-gradient(from 20deg, rgba(255,255,255,0.12), rgba(244,213,123,0.18), rgba(58,119,194,0.25), rgba(255,255,255,0.08), rgba(244,213,123,0.2), rgba(255,255,255,0.12));
+      opacity: 0.34;
+      filter: blur(0.2px);
+      pointer-events: none;
     }
 
-    .seal span {
-      display: block;
-      margin-top: 28px;
-      max-width: 94px;
-    }
-
-    .quote {
-      font-style: italic;
-      border-left: 3px solid var(--gold);
-      padding-left: 14px;
-      margin: 0;
-    }
-
-    .redacted {
-      background: #111;
-      color: transparent;
-      padding: 0 5px;
-      user-select: none;
-    }
-
-    .final-note {
-      background: var(--navy);
-      color: #fff;
-      padding: 24px;
-      margin-top: 26px;
-      border-top: 4px solid var(--red);
-    }
-
-    .final-note h2 {
-      margin: 0 0 10px;
-      font-family: Arial, Helvetica, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      font-size: 0.95rem;
-    }
-
-    .final-note p {
-      margin: 0;
-      line-height: 1.65;
-      color: #e8edf5;
-    }
-
-    .clearance-badge {
-      display: inline-block;
-      margin-top: 12px;
-      background: var(--green);
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.72rem;
-      padding: 7px 9px;
-    }
-
-    footer {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px 36px;
-      color: rgba(255,255,255,0.75);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.82rem;
-      line-height: 1.5;
-    }
-
-    footer p {
-      margin: 12px 0 0;
-    }
-
-    @media (max-width: 930px) {
-      .site-header-inner,
-      main {
-        grid-template-columns: 1fr;
-      }
-
-      .classification-stamp {
-        justify-self: start;
-      }
-
-      .sidebar {
-        border-left: 0;
-        padding-left: 0;
-      }
-
-      .case-meta {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 680px) {
-      .gov-bar-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .file-grid,
-      .case-meta {
-        grid-template-columns: 1fr;
-      }
-
-      .page {
-        margin: 18px auto;
-        padding: 0 12px;
-      }
-
-      main {
-        padding: 22px;
-      }
-
-      .site-header-inner {
-        padding: 24px 18px;
-      }
-
-      .nav-strip-inner {
-        padding: 0 12px;
-      }
-
-      .article-link {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 650px) {
+      body { overflow: auto; }
+      .menu { min-height: 82vh; border-radius: 22px; }
+      .menu-link { transform: none; padding-left: 48px; }
+      .menu-link:nth-child(n) { --shift: 0px; }
+      .footer { position: static; margin-top: 28px; }
+      .disc { display: none; }
     }
   </style>
 </head>
-
 <body>
-  <div class="gov-bar">
-    <div class="gov-bar-inner">
-      <div class="crest-mark">
-        <span class="crest-icon">JW</span>
-        Joint Wedding Intelligence Committee
-      </div>
-      <div>Classified briefing | Guest clearance required</div>
-    </div>
-  </div>
+  <main class="dvd-frame" aria-label="Bonus content DVD menu">
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
+    <span class="sparkle"></span>
 
-  <header class="site-header">
-    <div class="site-header-inner">
-      <div>
-        <div class="department">Wedding Intelligence Service</div>
+    <section class="menu">
+      <p class="eyebrow">Wedding DVD</p>
+      <h1>Bonus<br>Content</h1>
 
-        <h1>Classified Briefing:<br />Joe & Simon</h1>
+      <nav aria-label="Bonus content links">
+        <a class="menu-link" href="#stag-photos">Stag Photos</a>
+        <a class="menu-link" href="#wedding-stats">Wedding Stats</a>
+        <a class="menu-link" href="#chat-history">Simon and Joe's Chat History</a>
+        <a class="menu-link" href="#deplaned">Chris getting deplaned</a>
+        <a class="menu-link" href="#tbc">TBC</a>
+      </nav>
 
-        <p class="header-summary">
-          A restricted dossier prepared to assess the suitability of the named
-          subjects for married life. This archive contains background material,
-          witness intelligence, photographic evidence, behavioural analysis,
-          communications records and other classified findings.
-        </p>
-      </div>
-
-      <div class="classification-stamp">
-        <strong>Vetted</strong>
-        <span>For married life</span>
-        <span>Guest access authorised</span>
-      </div>
-    </div>
-  </header>
-
-  <nav class="nav-strip">
-    <div class="nav-strip-inner">
-      <a href="#briefing">Briefing</a>
-      <a href="#timeline">Timeline</a>
-      <a href="#associates">Associates</a>
-      <a href="#testing">Testing</a>
-      <a href="#clippings">Clippings</a>
-      <a href="#surveillance">Surveillance</a>
-      <a href="#interrogations">Interrogations</a>
-      <a href="#communications">Communications</a>
-    </div>
-  </nav>
-
-  <div class="page">
-    <div class="case-shell">
-      <section class="case-meta">
-        <div>
-          <strong>Reference</strong>
-          <span>JWIC/LOVE/VETTING/001</span>
-        </div>
-
-        <div>
-          <strong>Subjects</strong>
-          <span>Joe Allen & Simon</span>
-        </div>
-
-        <div>
-          <strong>Classification</strong>
-          <span>Secret: Wedding Eyes Only</span>
-        </div>
-
-        <div>
-          <strong>Recommendation</strong>
-          <span>Approved for Marriage</span>
-        </div>
-      </section>
-
-      <main>
-        <section>
-          <div class="notice" id="briefing">
-            <h2>Director’s Introduction</h2>
-
-            <p>
-              This site is a formal dossier of information compiled on Joe and
-              Simon in advance of their wedding. Its purpose is to vet both
-              subjects for married life through careful review of their history,
-              associates, communications, emotional stability, public behaviour
-              and capacity for long-term co-operation.
-            </p>
-
-            <p>
-              The material has been prepared in the style of a classified
-              briefing and should be handled accordingly. Guests are invited to
-              review the evidence, assess the findings, and determine whether
-              the couple are fit to proceed to matrimony.
-            </p>
-
-            <span class="clearance-badge">Preliminary finding: highly compatible</span>
-          </div>
-
-          <h2 class="section-title" id="timeline">Timeline of Events</h2>
-
-          <section class="file-grid">
-            <a class="file-card" href="timeline/index.html" data-file="File 01 / Chronology of contact">
-              <h3>How Simon and Joe Met</h3>
-              <p>
-                A reconstructed timeline detailing the first known contact
-                between the subjects, the early signs of mutual interest, and
-                the sequence of events that led to the current wedding operation.
-              </p>
-              <span class="file-type">Timeline</span>
-            </a>
-
-            <a class="file-card" href="story/index.html" data-file="File 02 / Relationship development">
-              <h3>Relationship History</h3>
-              <p>
-                Supporting background material covering the development of the
-                relationship, key milestones, suspiciously romantic behaviour and
-                the gradual escalation towards marriage.
-              </p>
-              <span class="file-type">Briefing</span>
-            </a>
-          </section>
-
-          <h2 class="section-title" id="associates">Known Associates</h2>
-
-          <section class="file-grid">
-            <a class="file-card" href="known-associates/index.html" data-file="File 03 / Wedding party intelligence">
-              <h3>Wedding Party Register</h3>
-              <p>
-                A classified index of known associates in the wedding party,
-                including compromising photographs, suspicious alliances and
-                relevant background intelligence.
-              </p>
-              <span class="file-type">Profiles</span>
-            </a>
-
-            <a class="file-card" href="known-associates/photos.html" data-file="File 04 / Compromising images">
-              <h3>Associate Photo Evidence</h3>
-              <p>
-                Photographic records of key witnesses, accomplices and
-                co-conspirators. Material may include questionable outfits,
-                dancefloor evidence and historic incidents.
-              </p>
-              <span class="file-type">Images</span>
-            </a>
-          </section>
-
-          <h2 class="section-title" id="testing">Compatibility Testing</h2>
-
-          <section class="file-grid">
-            <a class="file-card" href="compatibility-testing/index.html" data-file="File 05 / Statistical analysis">
-              <h3>Couple Performance Data</h3>
-              <p>
-                A highly scientific and in no way ridiculous collection of
-                graphs, statistics, charts and behavioural indicators designed
-                to test the couple’s readiness for married life.
-              </p>
-              <span class="file-type">Graphs</span>
-            </a>
-
-            <a class="file-card" href="compatibility-testing/results.html" data-file="File 06 / Findings and conclusions">
-              <h3>Compatibility Results</h3>
-              <p>
-                Final analytical outputs covering romance levels, bickering
-                resilience, shared silliness, sofa compatibility and long-term
-                partnership risk.
-              </p>
-              <span class="file-type">Analysis</span>
-            </a>
-          </section>
-
-          <h2 class="section-title" id="clippings">News Clippings</h2>
-
-          <section class="article-list">
-            <a class="article-link" href="news-clippings/gnome-incident.html">
-              <span class="article-code">Article 01</span>
-              <div>
-                <h3>The Gnome Incident</h3>
-                <p>
-                  A troubling report concerning garden statuary, unexplained
-                  activity and the subjects’ possible involvement.
-                </p>
-              </div>
-            </a>
-
-            <a class="article-link" href="news-clippings/landrover-theft.html">
-              <span class="article-code">Article 02</span>
-              <div>
-                <h3>The Landrover Theft</h3>
-                <p>
-                  A reconstructed account of an alleged vehicle-related incident
-                  requiring urgent archival review.
-                </p>
-              </div>
-            </a>
-
-            <a class="article-link" href="news-clippings/mz-lee-inc.html">
-              <span class="article-code">Article 03</span>
-              <div>
-                <h3>Mz Lee Inc</h3>
-                <p>
-                  Corporate filings, personality cult analysis and unexplained
-                  expansion activity connected to Mz Lee Inc.
-                </p>
-              </div>
-            </a>
-
-            <a class="article-link" href="news-clippings/simons-musical-career.html">
-              <span class="article-code">Article 04</span>
-              <div>
-                <h3>Simon’s Musical Career</h3>
-                <p>
-                  A special investigation into artistic output, performance
-                  history and the cultural significance of Simon’s musical era.
-                </p>
-              </div>
-            </a>
-          </section>
-
-          <h2 class="section-title" id="surveillance">Surveillance Images</h2>
-
-          <section class="file-grid">
-            <a class="file-card" href="surveillance-images/index.html" data-file="File 07 / Venue observation records">
-              <h3>Fourteen Venue Files</h3>
-              <p>
-                A photographic surveillance archive showing Joe and Simon in the
-                fourteen different venues after which the wedding tables have
-                been named.
-              </p>
-              <span class="file-type">Photo archive</span>
-            </a>
-
-            <a class="file-card" href="surveillance-images/table-names.html" data-file="File 08 / Table name cross-reference">
-              <h3>Table Name Index</h3>
-              <p>
-                Cross-referenced location intelligence connecting each table
-                name to the relevant venue, memory, photograph and operational
-                significance.
-              </p>
-              <span class="file-type">Index</span>
-            </a>
-          </section>
-
-          <h2 class="section-title" id="interrogations">Interrogations</h2>
-
-          <section class="file-grid">
-            <a class="file-card" href="interrogations/index.html" data-file="File 09 / Recorded testimony">
-              <h3>Mr & Mr Video Evidence</h3>
-              <p>
-                Recorded interrogation clips from both Mr & Mr videos. Subjects
-                are advised that inconsistencies, evasive answers and excessive
-                laughter may be used in evidence.
-              </p>
-              <span class="file-type">Video</span>
-            </a>
-
-            <a class="file-card" href="interrogations/transcripts.html" data-file="File 10 / Interview transcripts">
-              <h3>Interview Transcripts</h3>
-              <p>
-                Written records of questioning, answers, contradictions,
-                revelations and other material of interest to the committee.
-              </p>
-              <span class="file-type">Transcript</span>
-            </a>
-          </section>
-
-          <h2 class="section-title" id="communications">Declassified Communications</h2>
-
-          <section class="file-grid">
-            <a class="file-card" href="declassified-communications/index.html" data-file="File 11 / Message archive">
-              <h3>WhatsApp Records</h3>
-              <p>
-                A declassified selection of WhatsApp communications between Joe
-                and Simon, with sensitive details redacted in accordance with
-                wedding intelligence handling procedures.
-              </p>
-              <span class="file-type">Messages</span>
-            </a>
-
-            <a class="file-card" href="declassified-communications/redacted.html" data-file="File 12 / Redacted materials">
-              <h3>Redacted Extracts</h3>
-              <p>
-                Extracted communications featuring black-bar redactions,
-                suspicious affection, logistical planning and material too
-                classified for general release.
-              </p>
-              <span class="file-type">Redacted</span>
-            </a>
-          </section>
-
-          <div class="final-note">
-            <h2>Final Vetting Assessment</h2>
-            <p>
-              Having reviewed the available evidence, the committee finds that
-              Joe and Simon demonstrate unusually high levels of compatibility,
-              affection, resilience, humour and mutual incrimination. The
-              recommendation is therefore clear: the subjects are approved for
-              married life with immediate effect.
-            </p>
-          </div>
-        </section>
-
-        <aside class="sidebar">
-          <div class="side-panel">
-            <h2>Access Authorisation</h2>
-            <div class="side-panel-content">
-              <div class="seal">
-                <span>Wedding Guest Clearance</span>
-              </div>
-
-              <p>
-                Access to this dossier is granted for approved guests only.
-                Material should be reviewed with discretion, fondness and a
-                suitable drink in hand.
-              </p>
-            </div>
-          </div>
-
-          <div class="side-panel">
-            <h2>Operational Status</h2>
-            <div class="side-panel-content">
-              <ul class="status-list">
-                <li>
-                  <strong>Operation</strong>
-                  Marriage vetting and final approval
-                </li>
-                <li>
-                  <strong>Subjects</strong>
-                  Joe and Simon
-                </li>
-                <li>
-                  <strong>Risk level</strong>
-                  High probability of happy tears
-                </li>
-                <li>
-                  <strong>Evidence type</strong>
-                  Photos, videos, messages, testimony
-                </li>
-                <li>
-                  <strong>Primary threat</strong>
-                  Excessive joy
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="side-panel">
-            <h2>Handling Instructions</h2>
-            <div class="side-panel-content">
-              <p>
-                Treat all materials as classified. Do not share beyond
-                authorised wedding guests. Laugh generously. Cry discreetly.
-                Dance when instructed.
-              </p>
-            </div>
-          </div>
-
-          <div class="side-panel">
-            <h2>Analyst Note</h2>
-            <div class="side-panel-content">
-              <p class="quote">
-                “The evidence is conclusive. Both subjects appear fully prepared
-                for married life, pending final ceremonial confirmation.”
-              </p>
-            </div>
-          </div>
-
-          <div class="side-panel">
-            <h2>Redaction Notice</h2>
-            <div class="side-panel-content">
-              <p>
-                Certain details have been withheld to protect national security,
-                wedding speeches and the dignity of those involved.
-              </p>
-
-              <p>
-                Status: <span class="redacted">classified</span>
-              </p>
-            </div>
-          </div>
-        </aside>
-      </main>
-    </div>
-  </div>
-
-  <footer>
-    <p>
-      Fictional classified wedding briefing prepared for celebratory purposes.
-      This site is not affiliated with, endorsed by or representative of any real
-      UK government department, agency or intelligence service.
-    </p>
-  </footer>
+      <div class="disc" aria-hidden="true"></div>
+      <div class="footer">Select a chapter</div>
+    </section>
+  </main>
 </body>
 </html>
