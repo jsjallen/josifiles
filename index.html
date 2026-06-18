@@ -2,28 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Bonus Content</title>
   <style>
     :root {
-      --gold: #f4d57b;
-      --deep-gold: #a87622;
-      --blue: #051c45;
-      --blue2: #123a73;
-      --glow: rgba(255, 224, 135, 0.9);
+      --gold: #e8c56e;
+      --cream: #fff4d4;
+      --ink: #050403;
+      --panel: rgba(7, 5, 4, 0.92);
+      --line: rgba(232, 197, 110, 0.72);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: #050403;
+    }
 
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--gold);
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--cream);
       background:
-        radial-gradient(circle at 50% 45%, rgba(42, 98, 167, 0.9) 0%, rgba(9, 39, 88, 0.98) 34%, #020711 76%),
-        linear-gradient(135deg, #000 0%, #071c45 50%, #000 100%);
-      overflow: hidden;
+        radial-gradient(circle at 50% 14%, rgba(95, 62, 27, 0.36), transparent 28rem),
+        radial-gradient(circle at 50% 72%, rgba(95, 62, 27, 0.24), transparent 32rem),
+        #050403;
     }
 
     body::before {
@@ -34,245 +41,645 @@
       background:
         repeating-linear-gradient(
           to bottom,
-          rgba(255,255,255,0.045) 0,
-          rgba(255,255,255,0.045) 1px,
+          rgba(255, 255, 255, 0.03) 0,
+          rgba(255, 255, 255, 0.03) 1px,
           transparent 1px,
           transparent 5px
         );
       mix-blend-mode: overlay;
-      opacity: 0.45;
-      animation: scan 8s linear infinite;
+      opacity: 0.38;
+      z-index: 10;
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: -8%;
-      pointer-events: none;
-      background: radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.65) 82%);
-    }
-
-    @keyframes scan {
-      from { transform: translateY(-10px); }
-      to { transform: translateY(10px); }
-    }
-
-    .dvd-frame {
-      position: relative;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    .sparkle {
-      position: absolute;
-      border-radius: 50%;
-      background: white;
-      box-shadow: 0 0 14px 4px rgba(255,255,255,0.5);
-      opacity: 0.55;
-      animation: twinkle 3.5s infinite ease-in-out;
-    }
-
-    .sparkle:nth-child(1) { width: 3px; height: 3px; top: 16%; left: 18%; animation-delay: 0s; }
-    .sparkle:nth-child(2) { width: 2px; height: 2px; top: 24%; right: 21%; animation-delay: 1s; }
-    .sparkle:nth-child(3) { width: 4px; height: 4px; bottom: 19%; left: 24%; animation-delay: 1.8s; }
-    .sparkle:nth-child(4) { width: 2px; height: 2px; bottom: 29%; right: 18%; animation-delay: 2.4s; }
-
-    @keyframes twinkle {
-      0%, 100% { transform: scale(0.75); opacity: 0.25; }
-      50% { transform: scale(1.45); opacity: 0.8; }
-    }
-
-    .menu {
-      width: min(920px, 92vw);
-      min-height: min(680px, 86vh);
-      position: relative;
+    .page {
+      width: 100%;
+      min-height: 100svh;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: clamp(28px, 6vw, 70px);
-      border: 4px double rgba(244, 213, 123, 0.8);
-      border-radius: 34px;
-      background:
-        linear-gradient(145deg, rgba(4, 12, 31, 0.62), rgba(14, 58, 119, 0.35)),
-        radial-gradient(circle at 50% 0%, rgba(255, 221, 130, 0.12), transparent 36%);
-      box-shadow:
-        0 0 46px rgba(0,0,0,0.9),
-        inset 0 0 40px rgba(244, 213, 123, 0.14),
-        inset 0 0 100px rgba(0,0,0,0.35);
-      isolation: isolate;
+      padding: 0;
     }
 
-    .menu::before,
-    .menu::after {
+    .menu-shell {
+      position: relative;
+      width: min(100vw, 560px);
+      background: #050403;
+      box-shadow: 0 0 48px rgba(0, 0, 0, 0.85);
+    }
+
+    .menu-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .hotspot {
+      position: absolute;
+      display: block;
+      border: 0;
+      border-radius: 18px;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(232, 197, 110, 0.24);
+    }
+
+    .hotspot::after {
       content: "";
       position: absolute;
-      inset: 22px;
-      border-radius: 24px;
-      pointer-events: none;
+      inset: 0;
+      border-radius: inherit;
+      transition: background 150ms ease, box-shadow 150ms ease, outline-color 150ms ease;
     }
 
-    .menu::before {
-      border: 1px solid rgba(244, 213, 123, 0.42);
-      box-shadow: inset 0 0 28px rgba(244, 213, 123, 0.1);
+    .hotspot:hover::after,
+    .hotspot:focus-visible::after {
+      background: rgba(232, 197, 110, 0.08);
+      box-shadow:
+        inset 0 0 0 2px rgba(255, 239, 194, 0.58),
+        0 0 24px rgba(232, 197, 110, 0.25);
+      outline: 2px solid rgba(255, 239, 194, 0.85);
+      outline-offset: 3px;
     }
 
-    .menu::after {
+    .hotspot:focus-visible {
+      outline: none;
+    }
+
+    .hotspot-stag {
+      left: 4.5%;
+      top: 13.4%;
+      width: 91%;
+      height: 16.3%;
+    }
+
+    .hotspot-stats {
+      left: 4.5%;
+      top: 30.9%;
+      width: 91%;
+      height: 17.2%;
+    }
+
+    .hotspot-chat {
+      left: 4.5%;
+      top: 49.4%;
+      width: 91%;
+      height: 17.4%;
+    }
+
+    .hotspot-chris {
+      left: 4.5%;
+      top: 67.4%;
+      width: 91%;
+      height: 18.2%;
+    }
+
+    .hotspot-tbc {
+      left: 4.5%;
+      top: 85.2%;
+      width: 91%;
+      height: 10.7%;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 18px;
       background:
-        linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent),
-        linear-gradient(transparent, rgba(255,255,255,0.04), transparent);
-      transform: skewX(-12deg);
-      opacity: 0.55;
-      z-index: -1;
+        radial-gradient(circle at 50% 24%, rgba(121, 83, 38, 0.28), transparent 24rem),
+        rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(5px);
     }
 
-    .eyebrow {
-      margin: 0 0 8px;
-      font: 700 clamp(0.82rem, 1.6vw, 1rem) Arial, Helvetica, sans-serif;
-      letter-spacing: 0.46em;
-      text-transform: uppercase;
-      color: #f9e8ac;
-      text-shadow: 0 0 8px rgba(255, 226, 140, 0.75);
+    .modal.active {
+      display: flex;
     }
 
-    h1 {
-      margin: 0 0 clamp(34px, 6vh, 58px);
-      font-size: clamp(3rem, 9vw, 7rem);
-      line-height: 0.82;
-      text-align: center;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
+    .panel {
+      position: relative;
+      width: min(100%, 560px);
+      max-height: min(72svh, 720px);
+      overflow: auto;
+      padding: 26px 24px 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px 24px 18px 18px;
+      background:
+        linear-gradient(180deg, rgba(49, 30, 11, 0.62), rgba(7, 5, 4, 0.96) 38%),
+        var(--panel);
+      box-shadow:
+        0 -10px 45px rgba(0, 0, 0, 0.62),
+        inset 0 0 28px rgba(232, 197, 110, 0.08);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      width: 54px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 244, 212, 0.34);
+      transform: translateX(-50%);
+    }
+
+    .panel h2 {
+      margin: 18px 44px 12px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.65rem, 7vw, 2.6rem);
+      line-height: 1;
       color: var(--gold);
-      -webkit-text-stroke: 1px rgba(99, 55, 8, 0.7);
-      text-shadow:
-        0 3px 0 #6e3c0a,
-        0 8px 18px rgba(0,0,0,0.95),
-        0 0 24px rgba(255, 219, 118, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 0 #000, 0 0 16px rgba(232, 197, 110, 0.26);
     }
 
-    nav {
-      width: min(590px, 100%);
+    .panel p {
+      margin: 0 0 16px;
+      font-size: 1rem;
+      line-height: 1.58;
+      color: rgba(255, 244, 212, 0.86);
+    }
+
+    .panel ul {
+      margin: 16px 0 0;
+      padding-left: 20px;
+      color: rgba(255, 244, 212, 0.86);
+    }
+
+    .panel li {
+      margin: 8px 0;
+      line-height: 1.45;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255, 244, 212, 0.48);
+      border-radius: 999px;
+      color: var(--cream);
+      background: rgba(0, 0, 0, 0.38);
+      font-size: 1.65rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .close-button:hover,
+    .close-button:focus-visible {
+      outline: none;
+      color: #fff;
+      border-color: var(--gold);
+      box-shadow: 0 0 18px rgba(232, 197, 110, 0.28);
+    }
+
+    .photo-grid {
       display: grid;
-      gap: 13px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
     }
 
-    .menu-link {
-      --shift: 0px;
+    .photo-card {
       position: relative;
       display: block;
-      padding: 15px 24px 15px 54px;
-      border-radius: 999px;
-      color: #ffe8a5;
-      text-decoration: none;
-      font: 700 clamp(1.05rem, 2.6vw, 1.75rem) Arial, Helvetica, sans-serif;
-      letter-spacing: 0.045em;
-      text-transform: uppercase;
-      background: linear-gradient(90deg, rgba(255, 215, 112, 0.2), rgba(255, 215, 112, 0.04) 62%, transparent);
-      border: 1px solid rgba(244, 213, 123, 0.38);
-      box-shadow: inset 0 0 18px rgba(244, 213, 123, 0.08), 0 9px 18px rgba(0,0,0,0.32);
-      text-shadow: 0 2px 2px #000, 0 0 10px rgba(255, 225, 145, 0.38);
-      transform: translateX(var(--shift));
-      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease, color 180ms ease;
+      overflow: hidden;
+      min-height: 132px;
+      border: 1px solid rgba(232, 197, 110, 0.34);
+      border-radius: 14px;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.42);
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
     }
 
-    .menu-link:nth-child(2) { --shift: 22px; }
-    .menu-link:nth-child(3) { --shift: -10px; }
-    .menu-link:nth-child(4) { --shift: 18px; }
-    .menu-link:nth-child(5) { --shift: -18px; }
-
-    .menu-link::before {
-      content: "▶";
-      position: absolute;
-      left: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.8em;
-      color: #fff3c4;
-      opacity: 0;
-      text-shadow: 0 0 12px var(--glow);
-      transition: opacity 150ms ease, left 150ms ease;
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      transition: transform 180ms ease, filter 180ms ease;
     }
 
-    .menu-link:hover,
-    .menu-link:focus-visible {
-      color: #fff8d9;
-      outline: none;
-      background: linear-gradient(90deg, rgba(244, 213, 123, 0.48), rgba(244, 213, 123, 0.13) 70%, transparent);
-      box-shadow:
-        inset 0 0 22px rgba(255, 238, 184, 0.24),
-        0 0 24px rgba(255, 219, 118, 0.42),
-        0 10px 20px rgba(0,0,0,0.42);
-      transform: translateX(calc(var(--shift) + 13px)) scale(1.025);
+    .photo-card:hover img,
+    .photo-card:focus-visible img {
+      transform: scale(1.045);
+      filter: brightness(1.08);
     }
 
-    .menu-link:hover::before,
-    .menu-link:focus-visible::before {
-      opacity: 1;
-      left: 20px;
+    .photo-card:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
     }
 
-    .footer {
-      position: absolute;
-      bottom: 26px;
-      left: 0;
-      right: 0;
+    .lightbox-modal {
+      z-index: 80;
+      align-items: center;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .lightbox-panel {
+      position: relative;
+      width: min(100%, 980px);
+      max-height: 92svh;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(232, 197, 110, 0.58);
+      border-radius: 20px;
+      background: rgba(5, 4, 3, 0.96);
+      box-shadow: 0 0 48px rgba(0, 0, 0, 0.88);
+    }
+
+    .lightbox-panel::before {
+      display: none;
+    }
+
+    .lightbox-image-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44svh;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #000;
+    }
+
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 72svh;
+      object-fit: contain;
+    }
+
+    .lightbox-caption {
+      margin: 0;
+      padding: 0 48px;
       text-align: center;
-      font: 700 0.72rem Arial, Helvetica, sans-serif;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: rgba(255, 232, 165, 0.62);
-      text-shadow: 0 0 10px rgba(255, 232, 165, 0.45);
+      font-size: 0.9rem;
+      color: rgba(255, 244, 212, 0.72);
     }
 
-    .disc {
+    .lightbox-nav {
       position: absolute;
-      width: min(36vw, 265px);
-      aspect-ratio: 1;
-      right: max(-82px, -7vw);
-      bottom: max(-82px, -8vw);
-      border-radius: 50%;
-      background:
-        radial-gradient(circle, transparent 0 12%, rgba(255,255,255,0.8) 12.5% 14%, transparent 14.5% 100%),
-        conic-gradient(from 20deg, rgba(255,255,255,0.12), rgba(244,213,123,0.18), rgba(58,119,194,0.25), rgba(255,255,255,0.08), rgba(244,213,123,0.2), rgba(255,255,255,0.12));
-      opacity: 0.34;
-      filter: blur(0.2px);
-      pointer-events: none;
+      top: 50%;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 244, 212, 0.5);
+      border-radius: 999px;
+      color: var(--cream);
+      background: rgba(0, 0, 0, 0.56);
+      font-size: 1.8rem;
+      line-height: 1;
+      cursor: pointer;
+      transform: translateY(-50%);
     }
 
-    @media (max-width: 650px) {
-      body { overflow: auto; }
-      .menu { min-height: 82vh; border-radius: 22px; }
-      .menu-link { transform: none; padding-left: 48px; }
-      .menu-link:nth-child(n) { --shift: 0px; }
-      .footer { position: static; margin-top: 28px; }
-      .disc { display: none; }
+    .lightbox-prev {
+      left: 16px;
+    }
+
+    .lightbox-next {
+      right: 16px;
+    }
+
+    .lightbox-nav:hover,
+    .lightbox-nav:focus-visible {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 18px rgba(232, 197, 110, 0.28);
+    }
+
+    .video-panel {
+      padding: 22px;
+    }
+
+    .video-panel h2 {
+      margin-top: 22px;
+      font-size: clamp(1.45rem, 6vw, 2.15rem);
+    }
+
+    .video-frame {
+      overflow: hidden;
+      border: 1px solid rgba(232, 197, 110, 0.56);
+      border-radius: 16px;
+      background: #000;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.52);
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      max-height: 68svh;
+      background: #000;
+    }
+
+    .fallback-note {
+      display: block;
+      margin-top: 14px;
+      color: rgba(255, 244, 212, 0.68);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    @media (min-width: 760px) {
+      .page {
+        padding: 28px;
+      }
+
+      .menu-shell {
+        border-radius: 28px;
+        overflow: hidden;
+      }
+
+      .modal {
+        align-items: center;
+      }
+
+      .panel {
+        border-radius: 24px;
+        max-height: min(82vh, 760px);
+      }
+
+      .panel::before {
+        display: none;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="dvd-frame" aria-label="Bonus content DVD menu">
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
+  <main class="page">
+    <section class="menu-shell" aria-label="Bonus content DVD menu">
+      <img
+        class="menu-image"
+        src="assets/bonus-menu-mobile-portrait.png"
+        alt="Bonus Content DVD menu with sections for Stag Photos, Wedding Stats, Simon and Joe's Chat History, Chris Getting Deplaned, and TBC."
+      />
 
-    <section class="menu">
-      <p class="eyebrow">Wedding DVD</p>
-      <h1>Bonus<br>Content</h1>
-
-      <nav aria-label="Bonus content links">
-        <a class="menu-link" href="#stag-photos">Stag Photos</a>
-        <a class="menu-link" href="#wedding-stats">Wedding Stats</a>
-        <a class="menu-link" href="#chat-history">Simon and Joe's Chat History</a>
-        <a class="menu-link" href="#deplaned">Chris getting deplaned</a>
-        <a class="menu-link" href="#tbc">TBC</a>
-      </nav>
-
-      <div class="disc" aria-hidden="true"></div>
-      <div class="footer">Select a chapter</div>
+      <button class="hotspot hotspot-stag" type="button" data-section="stag" aria-label="Open Stag Photos"></button>
+      <button class="hotspot hotspot-stats" type="button" data-section="stats" aria-label="Open Wedding Stats"></button>
+      <button class="hotspot hotspot-chat" type="button" data-section="chat" aria-label="Open Simon and Joe's Chat History"></button>
+      <button class="hotspot hotspot-chris" type="button" data-section="chris" aria-label="Play Chris Getting Deplaned"></button>
+      <button class="hotspot hotspot-tbc" type="button" data-section="tbc" aria-label="Open TBC"></button>
     </section>
   </main>
+
+  <div class="modal" id="section-modal" aria-hidden="true">
+    <article class="panel" role="dialog" aria-modal="true" aria-labelledby="section-title">
+      <button class="close-button" type="button" data-close aria-label="Close section">×</button>
+      <h2 id="section-title"></h2>
+      <div id="section-body"></div>
+    </article>
+  </div>
+
+  <div class="modal lightbox-modal" id="photo-lightbox" aria-hidden="true">
+    <article class="lightbox-panel" role="dialog" aria-modal="true" aria-label="Stag photo viewer">
+      <button class="close-button" type="button" data-close-lightbox aria-label="Close photo viewer">×</button>
+      <button class="lightbox-nav lightbox-prev" type="button" data-photo-prev aria-label="Previous photo">‹</button>
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="" />
+      </div>
+      <button class="lightbox-nav lightbox-next" type="button" data-photo-next aria-label="Next photo">›</button>
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </article>
+  </div>
+
+  <div class="modal" id="video-modal" aria-hidden="true">
+    <article class="panel video-panel" role="dialog" aria-modal="true" aria-labelledby="video-title">
+      <button class="close-button" type="button" data-close-video aria-label="Close video">×</button>
+      <h2 id="video-title">Chris Getting Deplaned</h2>
+      <div class="video-frame">
+        <video id="chris-video" controls preload="metadata" playsinline>
+          <source src="videos/chris-getting-deplaned.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <span class="fallback-note">Add your video file at <strong>videos/chris-getting-deplaned.mp4</strong>.</span>
+    </article>
+  </div>
+
+  <script>
+    const stagPhotoFiles = [
+      "WhatsApp Image 2026-06-18 at 07.36.17.jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (1).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (2).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (3).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (4).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (5).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (6).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (7).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (8).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18 (9).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.18.jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.19 (1).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.19 (2).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.19.jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.21 (1).jpeg",
+      "WhatsApp Image 2026-06-18 at 07.36.21.jpeg"
+    ];
+
+    const stagPhotos = stagPhotoFiles.map(function (fileName, index) {
+      return {
+        src: "Stag Photos/" + encodeURIComponent(fileName),
+        alt: "Stag photo " + (index + 1)
+      };
+    });
+
+    const sections = {
+      stag: {
+        title: "Stag Photos",
+        body: renderStagGallery()
+      },
+      stats: {
+        title: "Wedding Stats",
+        body: `
+          <p>The official numbers section: speeches, dance moves, drinks, tears, love, and other rigorously peer-reviewed wedding metrics.</p>
+          <ul>
+            <li>Replace this copy with charts, counters, or animated stats.</li>
+            <li>The clickable zone already covers the chart area on the menu image.</li>
+          </ul>
+        `
+      },
+      chat: {
+        title: "Simon and Joe's Chat History",
+        body: `
+          <p>An archive of messages, planning chaos, emotional support, and probably one or two lines that should never be read aloud.</p>
+          <ul>
+            <li>This could link to screenshots, a transcript, or a fake chat interface.</li>
+            <li>Keep the good bits. Redact responsibly.</li>
+          </ul>
+        `
+      },
+      tbc: {
+        title: "TBC",
+        body: `
+          <p>A mysterious placeholder for future bonus content.</p>
+          <ul>
+            <li>Drop in a surprise video, gallery, quiz, or Easter egg later.</li>
+          </ul>
+        `
+      }
+    };
+
+    const sectionModal = document.getElementById("section-modal");
+    const sectionTitle = document.getElementById("section-title");
+    const sectionBody = document.getElementById("section-body");
+    const videoModal = document.getElementById("video-modal");
+    const chrisVideo = document.getElementById("chris-video");
+    const photoLightbox = document.getElementById("photo-lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    let lastFocusedElement = null;
+    let currentPhotoIndex = 0;
+
+    function renderStagGallery() {
+      const photoCards = stagPhotos.map(function (photo, index) {
+        return `
+          <button class="photo-card" type="button" data-photo-index="${index}" aria-label="Open stag photo ${index + 1}">
+            <img src="${photo.src}" alt="${photo.alt}" loading="lazy" />
+          </button>
+        `;
+      }).join("");
+
+      return `
+        <p>The official stag-do evidence locker. Tap any photo to open it full-screen, then swipe-ish with the arrow buttons.</p>
+        <div class="photo-grid">
+          ${photoCards}
+        </div>
+      `;
+    }
+
+    function openSection(sectionKey) {
+      const section = sections[sectionKey];
+      if (!section) return;
+
+      lastFocusedElement = document.activeElement;
+      sectionTitle.textContent = section.title;
+      sectionBody.innerHTML = section.body;
+      sectionModal.classList.add("active");
+      sectionModal.setAttribute("aria-hidden", "false");
+      sectionModal.querySelector("[data-close]").focus();
+
+      if (sectionKey === "stag") {
+        sectionBody.querySelectorAll("[data-photo-index]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            openPhoto(Number(button.dataset.photoIndex));
+          });
+        });
+      }
+    }
+
+    function closeSection() {
+      sectionModal.classList.remove("active");
+      sectionModal.setAttribute("aria-hidden", "true");
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+
+    function openVideo() {
+      lastFocusedElement = document.activeElement;
+      videoModal.classList.add("active");
+      videoModal.setAttribute("aria-hidden", "false");
+      videoModal.querySelector("[data-close-video]").focus();
+
+      chrisVideo.play().catch(function () {
+        // Mobile browsers may wait for the user to press play.
+      });
+    }
+
+    function closeVideo() {
+      chrisVideo.pause();
+      chrisVideo.currentTime = 0;
+      videoModal.classList.remove("active");
+      videoModal.setAttribute("aria-hidden", "true");
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+
+    function openPhoto(index) {
+      currentPhotoIndex = index;
+      updatePhoto();
+      photoLightbox.classList.add("active");
+      photoLightbox.setAttribute("aria-hidden", "false");
+      photoLightbox.querySelector("[data-close-lightbox]").focus();
+    }
+
+    function closePhoto() {
+      photoLightbox.classList.remove("active");
+      photoLightbox.setAttribute("aria-hidden", "true");
+    }
+
+    function updatePhoto() {
+      const photo = stagPhotos[currentPhotoIndex];
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+      lightboxCaption.textContent = "Stag photo " + (currentPhotoIndex + 1) + " of " + stagPhotos.length;
+    }
+
+    function showNextPhoto() {
+      currentPhotoIndex = (currentPhotoIndex + 1) % stagPhotos.length;
+      updatePhoto();
+    }
+
+    function showPreviousPhoto() {
+      currentPhotoIndex = (currentPhotoIndex - 1 + stagPhotos.length) % stagPhotos.length;
+      updatePhoto();
+    }
+
+    document.querySelectorAll(".hotspot").forEach(function (hotspot) {
+      hotspot.addEventListener("click", function () {
+        const section = hotspot.dataset.section;
+        if (section === "chris") {
+          openVideo();
+        } else {
+          openSection(section);
+        }
+      });
+    });
+
+    document.querySelector("[data-close]").addEventListener("click", closeSection);
+    document.querySelector("[data-close-video]").addEventListener("click", closeVideo);
+    document.querySelector("[data-close-lightbox]").addEventListener("click", closePhoto);
+    document.querySelector("[data-photo-next]").addEventListener("click", showNextPhoto);
+    document.querySelector("[data-photo-prev]").addEventListener("click", showPreviousPhoto);
+
+    sectionModal.addEventListener("click", function (event) {
+      if (event.target === sectionModal) closeSection();
+    });
+
+    videoModal.addEventListener("click", function (event) {
+      if (event.target === videoModal) closeVideo();
+    });
+
+    photoLightbox.addEventListener("click", function (event) {
+      if (event.target === photoLightbox) closePhoto();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (photoLightbox.classList.contains("active")) {
+        if (event.key === "ArrowRight") showNextPhoto();
+        if (event.key === "ArrowLeft") showPreviousPhoto();
+        if (event.key === "Escape") closePhoto();
+        return;
+      }
+
+      if (event.key !== "Escape") return;
+      if (videoModal.classList.contains("active")) closeVideo();
+      if (sectionModal.classList.contains("active")) closeSection();
+    });
+  </script>
 </body>
 </html>
