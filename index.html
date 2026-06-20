@@ -398,6 +398,309 @@
     }
 
 
+    .stats-intro {
+      margin-bottom: 18px;
+    }
+
+    .stats-dashboard {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .stat-card,
+    .chart-card,
+    .distance-card,
+    .names-card {
+      border: 1px solid rgba(232, 197, 110, 0.34);
+      border-radius: 18px;
+      padding: 16px;
+      background:
+        linear-gradient(180deg, rgba(255, 244, 212, 0.07), rgba(0, 0, 0, 0.18)),
+        rgba(0, 0, 0, 0.34);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .stat-kicker,
+    .chart-kicker {
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(232, 197, 110, 0.86);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .stat-number {
+      margin: 0;
+      color: #fff4d4;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 13vw, 4.4rem);
+      font-weight: 900;
+      line-height: 0.9;
+      text-shadow: 0 2px 0 #000, 0 0 18px rgba(232, 197, 110, 0.22);
+    }
+
+    .stat-caption {
+      margin: 10px 0 0;
+      color: rgba(255, 244, 212, 0.76);
+      font-size: 0.92rem;
+      line-height: 1.42;
+    }
+
+    .gender-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .gender-bar {
+      overflow: hidden;
+      border-radius: 999px;
+      height: 26px;
+      display: flex;
+      border: 1px solid rgba(255, 244, 212, 0.18);
+      background: rgba(0, 0, 0, 0.36);
+    }
+
+    .gender-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      color: #071107;
+      font-size: 0.7rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .gender-segment.male {
+      width: 71.1%;
+      background: linear-gradient(90deg, #fff4d4, #e8c56e);
+    }
+
+    .gender-segment.female {
+      width: 28.9%;
+      background: linear-gradient(90deg, #d7ffd9, #64ec80);
+    }
+
+    .legend-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: rgba(255, 244, 212, 0.84);
+      font-size: 0.88rem;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: var(--swatch, #e8c56e);
+      box-shadow: 0 0 12px rgba(232, 197, 110, 0.2);
+    }
+
+    .legend-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .donut-wrap {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 14px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .donut {
+      position: relative;
+      width: 132px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(#64ec80 0 54.7%, rgba(255, 244, 212, 0.12) 54.7% 100%);
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 212, 0.16), 0 0 24px rgba(100, 236, 128, 0.14);
+    }
+
+    .donut::after {
+      content: "55%";
+      position: absolute;
+      inset: 19px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff4d4;
+      background: #080604;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      font-weight: 900;
+      box-shadow: inset 0 0 20px rgba(232, 197, 110, 0.08);
+    }
+
+    .breakdown-chart {
+      display: grid;
+      gap: 11px;
+      margin-top: 14px;
+    }
+
+    .breakdown-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .breakdown-label {
+      color: rgba(255, 244, 212, 0.84);
+      font-size: 0.86rem;
+      line-height: 1.25;
+    }
+
+    .breakdown-value {
+      color: #e8c56e;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .breakdown-track {
+      grid-column: 1 / -1;
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.38);
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 212, 0.1);
+    }
+
+    .breakdown-fill {
+      display: block;
+      height: 100%;
+      width: var(--width);
+      border-radius: inherit;
+      background: linear-gradient(90deg, #e8c56e, #fff4d4);
+      box-shadow: 0 0 14px rgba(232, 197, 110, 0.22);
+    }
+
+    .names-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .name-rank {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.26);
+      border: 1px solid rgba(255, 244, 212, 0.12);
+    }
+
+    .name-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .name-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: #071107;
+      background: linear-gradient(180deg, #fff4d4, #e8c56e);
+      font-weight: 900;
+      font-size: 0.86rem;
+    }
+
+    .name-count {
+      flex: 0 0 auto;
+      color: rgba(255, 244, 212, 0.72);
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .podium {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .podium-place {
+      position: relative;
+      padding: 14px 14px 14px 54px;
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 244, 212, 0.14);
+    }
+
+    .podium-place::before {
+      content: attr(data-rank);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #071107;
+      background: linear-gradient(180deg, #fff4d4, #e8c56e);
+      font-weight: 900;
+    }
+
+    .podium-name {
+      display: block;
+      color: #fff4d4;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+
+    .podium-location {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 244, 212, 0.72);
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 370px) {
+      .donut-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .donut {
+        margin-inline: auto;
+      }
+    }
+
+    @media (min-width: 760px) {
+      .stats-row.two-up {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+
     .chat-game-intro {
       margin-bottom: 18px;
     }
@@ -703,10 +1006,6 @@
         grid-template-columns: 1fr;
       }
 
-      .secret-order-card h2 {
-        font-size: clamp(1.95rem, 8.2vw, 3.1rem);
-        letter-spacing: -0.06em;
-      }
     }
 
     @media (min-width: 760px) {
@@ -885,13 +1184,7 @@ SIMON: Oh shut up.`]
       },
       stats: {
         title: "Wedding Stats",
-        body: `
-          <p>The official numbers section: speeches, dance moves, drinks, tears, love, and other rigorously peer-reviewed wedding metrics.</p>
-          <ul>
-            <li>Replace this copy with charts, counters, or animated stats.</li>
-            <li>The clickable zone already covers the chart area on the menu image.</li>
-          </ul>
-        `
+        body: renderWeddingStats()
       },
       chat: {
         title: "Simon and Joe's Chat History",
@@ -919,6 +1212,109 @@ SIMON: Oh shut up.`]
     const lightboxCaption = document.getElementById("lightbox-caption");
     let lastFocusedElement = null;
     let currentPhotoIndex = 0;
+
+
+    function renderWeddingStats() {
+      const guestBreakdown = [
+        ["Simon’s friends", "31.1%"],
+        ["Joe’s friends", "27.7%"],
+        ["Joe’s family", "14.9%"],
+        ["Simon’s university friends", "14.9%"],
+        ["Joe’s work friends", "6.1%"],
+        ["Simon’s family", "5.4%"]
+      ];
+
+      const breakdownRows = guestBreakdown.map(function (item) {
+        return `
+          <div class="breakdown-item">
+            <span class="breakdown-label">${item[0]}</span>
+            <span class="breakdown-value">${item[1]}</span>
+            <span class="breakdown-track" aria-hidden="true"><span class="breakdown-fill" style="--width: ${item[1]}"></span></span>
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <p class="stats-intro">A tiny census of the room: who’s here, how they know us, how far they’ve come, and which names are going to make the table plan confusing.</p>
+
+        <div class="stats-dashboard">
+          <div class="stats-row two-up">
+            <section class="stat-card" aria-label="Gender split">
+              <span class="stat-kicker">Gender split</span>
+              <p class="stat-number">106 / 43</p>
+              <p class="stat-caption">106 male guests and 43 female guests, based on the current guest count data.</p>
+              <div class="gender-split">
+                <div class="gender-bar" aria-hidden="true">
+                  <span class="gender-segment male">Male 71%</span>
+                  <span class="gender-segment female">Female 29%</span>
+                </div>
+                <div class="legend-list">
+                  <span class="legend-item"><span class="legend-name"><span class="legend-swatch" style="--swatch:#e8c56e"></span>Male</span><strong>106</strong></span>
+                  <span class="legend-item"><span class="legend-name"><span class="legend-swatch" style="--swatch:#64ec80"></span>Female</span><strong>43</strong></span>
+                </div>
+              </div>
+            </section>
+
+            <section class="stat-card" aria-label="Estimated Friends of Dorothy">
+              <span class="stat-kicker">Estimated Friends of Dorothy</span>
+              <div class="donut-wrap">
+                <div class="donut" aria-hidden="true"></div>
+                <div>
+                  <p class="stat-number">82</p>
+                  <p class="stat-caption">That is about <strong>55%</strong> of the 150 guests. Statistically, this is less a wedding and more a very elegant queer summit.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="chart-card" aria-label="Guest breakdown chart">
+            <span class="chart-kicker">Guest breakdown</span>
+            <p>How the guest list breaks down by connection to Joe and Simon.</p>
+            <div class="breakdown-chart">
+              ${breakdownRows}
+            </div>
+          </section>
+
+          <section class="names-card" aria-label="Common names">
+            <span class="chart-kicker">Common names</span>
+            <p>The names most likely to cause someone to turn around at the bar.</p>
+            <div class="names-grid">
+              <div class="name-rank">
+                <div class="name-pills"><span class="name-pill">David</span><span class="name-pill">Joe</span></div>
+                <span class="name-count">6 each</span>
+              </div>
+              <div class="name-rank">
+                <div class="name-pills"><span class="name-pill">Tom</span><span class="name-pill">Mark</span></div>
+                <span class="name-count">4 each</span>
+              </div>
+              <div class="name-rank">
+                <div class="name-pills"><span class="name-pill">Sarah</span><span class="name-pill">Rob</span><span class="name-pill">Alex</span><span class="name-pill">Jonny</span></div>
+                <span class="name-count">3 each</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="distance-card" aria-label="Distance travelled">
+            <span class="chart-kicker">Distance travelled</span>
+            <p>The long-haul legends who came furthest to be here.</p>
+            <div class="podium">
+              <div class="podium-place" data-rank="1">
+                <span class="podium-name">Rees and Lynton</span>
+                <span class="podium-location">Dubai to Huntsham Court — international commitment with a suspiciously good tan.</span>
+              </div>
+              <div class="podium-place" data-rank="2">
+                <span class="podium-name">Ethan and Sören</span>
+                <span class="podium-location">Barcelona to Tiverton — bringing continental glamour to Devon.</span>
+              </div>
+              <div class="podium-place" data-rank="3">
+                <span class="podium-name">Alex Paterakis</span>
+                <span class="podium-location">Milan to Tiverton — fashion capital to wedding capital.</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
 
     function renderStagGallery() {
       const photoCards = stagPhotos.map(function (photo, index) {
