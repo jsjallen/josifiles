@@ -108,37 +108,30 @@
 
     .hotspot-stag {
       left: 4.5%;
-      top: 13.4%;
+      top: 13.0%;
       width: 91%;
-      height: 16.3%;
+      height: 17.0%;
     }
 
     .hotspot-stats {
       left: 4.5%;
-      top: 30.9%;
-      width: 91%;
-      height: 17.2%;
-    }
-
-    .hotspot-chat {
-      left: 4.5%;
-      top: 49.4%;
-      width: 91%;
-      height: 17.4%;
-    }
-
-    .hotspot-chris {
-      left: 4.5%;
-      top: 67.4%;
+      top: 30.2%;
       width: 91%;
       height: 18.2%;
     }
 
-    .hotspot-tbc {
+    .hotspot-chat {
       left: 4.5%;
-      top: 85.2%;
+      top: 48.8%;
       width: 91%;
-      height: 10.7%;
+      height: 18.6%;
+    }
+
+    .hotspot-chris {
+      left: 4.5%;
+      top: 67.8%;
+      width: 91%;
+      height: 26.0%;
     }
 
     .modal {
@@ -250,6 +243,33 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
       margin-top: 18px;
+    }
+
+
+    .gallery-section {
+      margin-top: 22px;
+    }
+
+    .gallery-section:first-of-type {
+      margin-top: 18px;
+    }
+
+    .gallery-section-title {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 5vw, 1.75rem);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 0 #000, 0 0 12px rgba(232, 197, 110, 0.22);
+    }
+
+    .gallery-section-note {
+      margin: -4px 0 12px;
+      color: rgba(255, 244, 212, 0.66);
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
 
     .photo-card {
@@ -1045,14 +1065,13 @@
       <img
         class="menu-image"
         src="assets/bonus-menu-mobile-portrait.png"
-        alt="Bonus Content DVD menu with sections for Stag Photos, Wedding Stats, Simon and Joe's Chat History, Chris Getting Deplaned, and TBC."
+        alt="Bonus Content DVD menu with sections for Stag Photos, Wedding Stats, Simon and Joe's Chat History, and Chris Getting Deplaned."
       />
 
       <button class="hotspot hotspot-stag" type="button" data-section="stag" aria-label="Open Stag Photos"></button>
       <button class="hotspot hotspot-stats" type="button" data-section="stats" aria-label="Open Wedding Stats"></button>
       <button class="hotspot hotspot-chat" type="button" data-section="chat" aria-label="Open Simon and Joe's Chat History"></button>
       <button class="hotspot hotspot-chris" type="button" data-section="chris" aria-label="Play Chris Getting Deplaned"></button>
-      <button class="hotspot hotspot-tbc" type="button" data-section="tbc" aria-label="Open TBC"></button>
     </section>
   </main>
 
@@ -1102,7 +1121,7 @@
   </div>
 
   <script>
-    const stagPhotoFiles = [
+    const joeBarcelonaPhotoFiles = [
       "WhatsApp Image 2026-06-18 at 07.36.17.jpeg",
       "WhatsApp Image 2026-06-18 at 07.36.18 (1).jpeg",
       "WhatsApp Image 2026-06-18 at 07.36.18 (2).jpeg",
@@ -1121,11 +1140,54 @@
       "WhatsApp Image 2026-06-18 at 07.36.21.jpeg"
     ];
 
-    const stagPhotos = stagPhotoFiles.map(function (fileName, index) {
-      return {
-        src: "Stag Photos/" + encodeURIComponent(fileName),
-        alt: "Stag photo " + (index + 1)
-      };
+    const simonMadridPhotoFiles = [
+      "WhatsApp Image 2026-06-20 at 11.19.12.jpeg",
+      "WhatsApp Image 2026-06-20 at 11.58.33 (1).jpeg",
+      "WhatsApp Image 2026-06-20 at 11.58.33 (2).jpeg",
+      "WhatsApp Image 2026-06-20 at 11.58.33 (3).jpeg",
+      "WhatsApp Image 2026-06-20 at 11.58.33.jpeg",
+      "WhatsApp Image 2026-06-20 at 11.58.34 (1).jpeg",
+      "WhatsApp Image 2026-06-20 at 11.58.34.jpeg",
+      "WhatsApp Image 2026-06-20 at 11.59.29 (1).jpeg",
+      "WhatsApp Image 2026-06-20 at 11.59.29 (2).jpeg",
+      "WhatsApp Image 2026-06-20 at 11.59.29.jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.39 (1).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.39 (2).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.39 (3).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.39 (4).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.39 (5).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.39 (6).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.39.jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.40 (1).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.40 (2).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.40 (3).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.40 (4).jpeg",
+      "WhatsApp Image 2026-06-20 at 12.07.40.jpeg",
+      "WhatsApp Image 2026-06-20 at 12.11.42.jpeg"
+    ];
+
+    const stagPhotoGroups = [
+      {
+        title: "Joe - Barcelona",
+        folder: "Stag Photos",
+        files: joeBarcelonaPhotoFiles
+      },
+      {
+        title: "Simon - Madrid",
+        folder: "Simon - Madrid",
+        files: simonMadridPhotoFiles
+      }
+    ];
+
+    const stagPhotos = stagPhotoGroups.flatMap(function (group) {
+      return group.files.map(function (fileName, index) {
+        return {
+          src: group.folder + "/" + encodeURIComponent(fileName),
+          alt: group.title + " photo " + (index + 1),
+          group: group.title,
+          indexInGroup: index + 1
+        };
+      });
     });
 
     const chatChallenges = [
@@ -1182,15 +1244,6 @@ SIMON: Oh shut up.`]
       chat: {
         title: "Simon and Joe's Chat History",
         body: renderChatGame()
-      },
-      tbc: {
-        title: "TBC",
-        body: `
-          <p>A mysterious placeholder for future bonus content.</p>
-          <ul>
-            <li>Drop in a surprise video, gallery, quiz, or Easter egg later.</li>
-          </ul>
-        `
       }
     };
 
@@ -1310,19 +1363,34 @@ SIMON: Oh shut up.`]
     }
 
     function renderStagGallery() {
-      const photoCards = stagPhotos.map(function (photo, index) {
+      let photoIndexOffset = 0;
+
+      const gallerySections = stagPhotoGroups.map(function (group) {
+        const photoCards = group.files.map(function (fileName, index) {
+          const globalIndex = photoIndexOffset + index;
+          return `
+            <button class="photo-card" type="button" data-photo-index="${globalIndex}" aria-label="Open ${escapeHtml(group.title)} photo ${index + 1}">
+              <img src="${group.folder}/${encodeURIComponent(fileName)}" alt="${escapeHtml(group.title)} photo ${index + 1}" loading="lazy" />
+            </button>
+          `;
+        }).join("");
+
+        photoIndexOffset += group.files.length;
+
         return `
-          <button class="photo-card" type="button" data-photo-index="${index}" aria-label="Open stag photo ${index + 1}">
-            <img src="${photo.src}" alt="${photo.alt}" loading="lazy" />
-          </button>
+          <section class="gallery-section" aria-label="${escapeHtml(group.title)} photos">
+            <h3 class="gallery-section-title">${escapeHtml(group.title)}</h3>
+            <p class="gallery-section-note">${group.files.length} photos</p>
+            <div class="photo-grid">
+              ${photoCards}
+            </div>
+          </section>
         `;
       }).join("");
 
       return `
-        <p>The official stag-do evidence locker. Tap any photo to open it full-screen, then swipe-ish with the arrow buttons.</p>
-        <div class="photo-grid">
-          ${photoCards}
-        </div>
+        <p>The official stag-do evidence locker. Tap any photo to open it full-screen, then use the arrow buttons to move through the full collection.</p>
+        ${gallerySections}
       `;
     }
 
@@ -1542,7 +1610,7 @@ SIMON: Oh shut up.`]
       const photo = stagPhotos[currentPhotoIndex];
       lightboxImage.src = photo.src;
       lightboxImage.alt = photo.alt;
-      lightboxCaption.textContent = "Stag photo " + (currentPhotoIndex + 1) + " of " + stagPhotos.length;
+      lightboxCaption.textContent = photo.group + " photo " + photo.indexInGroup + " of " + stagPhotos.length + " total";
     }
 
     function showNextPhoto() {
