@@ -392,6 +392,311 @@
       line-height: 1.45;
     }
 
+
+    .chat-game-intro {
+      margin-bottom: 18px;
+    }
+
+    .chat-game {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .chat-card {
+      border: 1px solid rgba(232, 197, 110, 0.34);
+      border-radius: 18px;
+      padding: 16px;
+      background:
+        linear-gradient(180deg, rgba(255, 244, 212, 0.06), rgba(0, 0, 0, 0.2)),
+        rgba(0, 0, 0, 0.34);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .chat-date {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(232, 197, 110, 0.88);
+    }
+
+    .chat-phrase {
+      margin: 0 0 14px;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      color: rgba(255, 244, 212, 0.92);
+      white-space: pre-line;
+    }
+
+    .redacted-word {
+      display: inline-block;
+      min-width: 5.9em;
+      padding: 0.08em 0.38em;
+      border-radius: 0.35em;
+      color: transparent;
+      background: linear-gradient(180deg, #ffe58a, #d6a72f);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.36),
+        inset 0 -8px 14px rgba(91, 55, 0, 0.18),
+        0 0 15px rgba(232, 197, 110, 0.34);
+      vertical-align: baseline;
+      user-select: none;
+    }
+
+    .chat-card.solved .redacted-word {
+      min-width: 0;
+      color: #071107;
+      font-weight: 800;
+      background: linear-gradient(180deg, #9dff9d, #45d66a);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.42),
+        0 0 18px rgba(82, 255, 126, 0.26);
+      user-select: text;
+    }
+
+    .guess-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .guess-input {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid rgba(255, 244, 212, 0.32);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: var(--cream);
+      background: rgba(0, 0, 0, 0.42);
+      font: 700 1rem Arial, Helvetica, sans-serif;
+    }
+
+    .guess-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(232, 197, 110, 0.18);
+    }
+
+    .guess-input.correct {
+      border-color: #5cff86;
+      background: rgba(19, 92, 42, 0.34);
+      box-shadow: 0 0 0 3px rgba(92, 255, 134, 0.16);
+    }
+
+    .guess-feedback {
+      min-height: 1.3em;
+      margin: 8px 0 0;
+      font-size: 0.85rem;
+      color: rgba(255, 244, 212, 0.64);
+    }
+
+    .letter-clue {
+      min-height: 1.35em;
+      margin: 6px 0 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255, 232, 165, 0.82);
+    }
+
+    .letter-meter {
+      display: block;
+      width: 100%;
+      height: 8px;
+      margin-top: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.38);
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 212, 0.12);
+    }
+
+    .letter-meter-fill {
+      display: block;
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #e8c56e, #fff1b5);
+      transition: width 160ms ease;
+    }
+
+    .chat-card.solved .guess-feedback,
+    .chat-card.solved .letter-clue {
+      color: #8dff9e;
+      font-weight: 700;
+    }
+
+    .chat-card.solved .letter-meter-fill {
+      width: 100% !important;
+      background: linear-gradient(90deg, #5cff86, #d7ffd9);
+    }
+
+    .unlock-message {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid rgba(92, 255, 134, 0.72);
+      border-radius: 18px;
+      color: #071107;
+      background: linear-gradient(180deg, #d7ffd9, #64ec80);
+      font-weight: 900;
+      line-height: 1.45;
+      text-align: center;
+      box-shadow: 0 0 26px rgba(92, 255, 134, 0.28);
+    }
+
+    .unlock-message.visible {
+      display: block;
+    }
+
+    .secret-order-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 32%, rgba(255, 232, 165, 0.26), transparent 18rem),
+        radial-gradient(circle at 20% 18%, rgba(92, 255, 134, 0.18), transparent 12rem),
+        radial-gradient(circle at 86% 78%, rgba(232, 197, 110, 0.22), transparent 14rem),
+        rgba(0, 0, 0, 0.93);
+      backdrop-filter: blur(7px);
+    }
+
+    .secret-order-modal.active {
+      display: flex;
+    }
+
+    .secret-order-modal::before,
+    .secret-order-modal::after {
+      content: "🍾 ✨ 🥃 ✨ 🎉 ✨ 🥃 ✨ 🍾";
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      color: rgba(255, 244, 212, 0.9);
+      font-size: clamp(1.8rem, 8vw, 4.6rem);
+      letter-spacing: 0.22em;
+      white-space: nowrap;
+      text-align: center;
+      text-shadow: 0 0 22px rgba(232, 197, 110, 0.46);
+      animation: celebrationDrift 5s linear infinite;
+    }
+
+    .secret-order-modal::before {
+      top: 8%;
+    }
+
+    .secret-order-modal::after {
+      bottom: 9%;
+      animation-direction: reverse;
+      opacity: 0.76;
+    }
+
+    .secret-order-card {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 620px);
+      padding: clamp(28px, 8vw, 52px) clamp(22px, 7vw, 48px);
+      border: 2px solid rgba(232, 197, 110, 0.9);
+      border-radius: 30px;
+      color: #071107;
+      text-align: center;
+      background:
+        linear-gradient(180deg, #fff4d4, #e8c56e 54%, #64ec80);
+      box-shadow:
+        0 0 70px rgba(232, 197, 110, 0.4),
+        0 0 36px rgba(92, 255, 134, 0.22),
+        inset 0 0 24px rgba(255, 255, 255, 0.28);
+      transform: scale(0.96);
+      animation: secretPop 420ms ease forwards;
+    }
+
+    .secret-kicker {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(7, 17, 7, 0.7);
+    }
+
+    .secret-order-card h2 {
+      margin: 0 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 12vw, 5rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: #071107;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.42);
+    }
+
+    .secret-order-card p {
+      margin: 0;
+      font-size: clamp(1.05rem, 4.6vw, 1.5rem);
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .secret-order-card strong {
+      display: block;
+      margin-top: 12px;
+      font-size: clamp(1.6rem, 9vw, 3.4rem);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .secret-close-button {
+      margin-top: 26px;
+      min-height: 48px;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 22px;
+      color: var(--cream);
+      background: #071107;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+    }
+
+    .secret-close-button:focus-visible,
+    .secret-close-button:hover {
+      outline: 3px solid rgba(7, 17, 7, 0.24);
+      outline-offset: 3px;
+    }
+
+    @keyframes secretPop {
+      from { opacity: 0; transform: translateY(18px) scale(0.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes celebrationDrift {
+      from { transform: translateX(-12%); }
+      to { transform: translateX(12%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .secret-order-card,
+      .secret-order-modal::before,
+      .secret-order-modal::after {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .guess-row {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
     @media (min-width: 760px) {
       .page {
         padding: 28px;
@@ -473,6 +778,18 @@
     </article>
   </div>
 
+  <div class="secret-order-modal" id="secret-order-modal" aria-hidden="true">
+    <article class="secret-order-card" role="dialog" aria-modal="true" aria-labelledby="secret-order-title">
+      <span class="secret-kicker">Secret bar order unlocked</span>
+      <h2 id="secret-order-title">Congratulations!</h2>
+      <p>
+        You've unlocked the secret bar order. You may now ask for
+        <strong>Jägerbombs</strong>
+      </p>
+      <button class="secret-close-button" type="button" data-close-secret>Back to bonus content</button>
+    </article>
+  </div>
+
   <script>
     const stagPhotoFiles = [
       "WhatsApp Image 2026-06-18 at 07.36.17.jpeg",
@@ -500,6 +817,54 @@
       };
     });
 
+    const chatChallenges = [
+      {
+        date: "17/04/2021",
+        answer: "Bob Bob",
+        phraseParts: [`Joe: So, dinner at `, ` then. 😂`]
+      },
+      {
+        date: "18/04/2021",
+        answer: "date with you",
+        phraseParts: [`SIMON: I don’t want to wait a month for a `, `.
+JOE: I was thinking exactly the same.`]
+      },
+      {
+        date: "20/05/2021",
+        answer: "weekend away",
+        phraseParts: [`SIMON: Is it weird we’re thinking about a `, ` after 5 dates?
+JOE: Weirdly, it doesn’t feel weird.
+SIMON: That’s what’s weird.`]
+      },
+      {
+        date: "30/05/2021",
+        answer: "Patrick",
+        phraseParts: [`JOE: Are you Alexis or David?
+SIMON: Probably David. Will you be my `, `?`]
+      },
+      {
+        date: "23/06/2021",
+        answer: "boyfriend",
+        phraseParts: [`Simon: omg my `, ` is HOTTTTT
+Joe: I’m sorry your what now? 😜
+Simon: you read me
+Joe: Sure did 😘😘`]
+      },
+      {
+        date: "13/08/2021",
+        answer: "LinkedIn",
+        phraseParts: [`Simon: no beb
+Simon: you're my official +1 now
+Simon: better get used to it
+Joe: It's already on my `, ` profile 😝`]
+      },
+      {
+        date: "19/07/2022",
+        answer: "bath",
+        phraseParts: [`JOE: I laughed out loud this morning when I remembered that you spent Sunday mostly asleep naked in the `, ` 😂😂😂
+SIMON: Oh shut up.`]
+      }
+    ];
     const sections = {
       stag: {
         title: "Stag Photos",
@@ -517,13 +882,7 @@
       },
       chat: {
         title: "Simon and Joe's Chat History",
-        body: `
-          <p>An archive of messages, planning chaos, emotional support, and probably one or two lines that should never be read aloud.</p>
-          <ul>
-            <li>This could link to screenshots, a transcript, or a fake chat interface.</li>
-            <li>Keep the good bits. Redact responsibly.</li>
-          </ul>
-        `
+        body: renderChatGame()
       },
       tbc: {
         title: "TBC",
@@ -542,6 +901,7 @@
     const videoModal = document.getElementById("video-modal");
     const chrisVideo = document.getElementById("chris-video");
     const photoLightbox = document.getElementById("photo-lightbox");
+    const secretOrderModal = document.getElementById("secret-order-modal");
     const lightboxImage = document.getElementById("lightbox-image");
     const lightboxCaption = document.getElementById("lightbox-caption");
     let lastFocusedElement = null;
@@ -564,6 +924,156 @@
       `;
     }
 
+
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function renderChatGame() {
+      const cards = chatChallenges.map(function (challenge, index) {
+        const redactedLength = Math.max(6, challenge.answer.length);
+        return `
+          <article class="chat-card" data-chat-index="${index}">
+            <span class="chat-date">${escapeHtml(challenge.date)}</span>
+            <p class="chat-phrase">
+              ${escapeHtml(challenge.phraseParts[0])}<span class="redacted-word" data-redacted>${"█".repeat(redactedLength)}</span>${escapeHtml(challenge.phraseParts[1])}
+            </p>
+            <div class="guess-row">
+              <input class="guess-input" type="text" data-guess-input autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the missing word(s)" aria-label="Guess missing words for phrase ${index + 1}" />
+            </div>
+            <p class="guess-feedback" data-feedback aria-live="polite">Keep typing — it will unlock automatically when correct.</p>
+            <p class="letter-clue" data-letter-clue aria-live="polite">Clue: start typing to see how close your letters are.</p>
+            <span class="letter-meter" aria-hidden="true"><span class="letter-meter-fill" data-letter-meter></span></span>
+          </article>
+        `;
+      }).join("");
+
+      return `
+        <p class="chat-game-intro">Here are seven messages from the early days of our relationship, one or more words are missing from each one. Type the missing word or words, and if you get it right, that phrase will unlock. Get all 7 correct to unlock the secret bar order.</p>
+        <div class="chat-game" id="chat-game">
+          ${cards}
+        </div>
+        <div class="unlock-message" id="unlock-message" role="status" aria-live="polite">
+          Congratulations, you've unlocked the secret bar order, you may now ask for Jägerbombs
+        </div>
+      `;
+    }
+
+    function normaliseGuess(value) {
+      return String(value)
+        .toLowerCase()
+        .replace(/[’']/g, "")
+        .replace(/[^a-z0-9]+/g, " ")
+        .trim()
+        .replace(/\s+/g, " ");
+    }
+
+    function lettersOnly(value) {
+      return normaliseGuess(value).replace(/[^a-z0-9]/g, "");
+    }
+
+    function countMatchingTypedLetters(guess, answer) {
+      const guessLetters = lettersOnly(guess);
+      const answerLetters = lettersOnly(answer);
+      const remaining = {};
+      let matches = 0;
+
+      for (const letter of answerLetters) {
+        remaining[letter] = (remaining[letter] || 0) + 1;
+      }
+
+      for (const letter of guessLetters) {
+        if (remaining[letter] > 0) {
+          matches += 1;
+          remaining[letter] -= 1;
+        }
+      }
+
+      return {
+        matches: matches,
+        typed: guessLetters.length,
+        answerLength: answerLetters.length,
+        percentage: answerLetters.length ? Math.round((matches / answerLetters.length) * 100) : 0
+      };
+    }
+
+    function attachChatGame() {
+      const game = sectionBody.querySelector("#chat-game");
+      if (!game) return;
+
+      game.querySelectorAll(".chat-card").forEach(function (card) {
+        const index = Number(card.dataset.chatIndex);
+        const challenge = chatChallenges[index];
+        const input = card.querySelector("[data-guess-input]");
+        const feedback = card.querySelector("[data-feedback]");
+        const redacted = card.querySelector("[data-redacted]");
+        const letterClue = card.querySelector("[data-letter-clue]");
+        const letterMeter = card.querySelector("[data-letter-meter]");
+
+        function updateLetterClue() {
+          const clue = countMatchingTypedLetters(input.value, challenge.answer);
+
+          if (clue.typed === 0) {
+            letterClue.textContent = "Clue: start typing to see how close your letters are.";
+            letterMeter.style.width = "0%";
+            return;
+          }
+
+          letterClue.textContent = `Clue: ${clue.matches} of ${clue.answerLength} answer letters found (${clue.percentage}%).`;
+          letterMeter.style.width = Math.min(100, clue.percentage) + "%";
+        }
+
+        function checkAnswer() {
+          updateLetterClue();
+          const isCorrect = normaliseGuess(input.value) === normaliseGuess(challenge.answer);
+
+          if (isCorrect) {
+            card.classList.add("solved");
+            input.classList.add("correct");
+            input.disabled = true;
+            redacted.textContent = challenge.answer;
+            feedback.textContent = "Correct!";
+            letterClue.textContent = "Clue: 100% — fully restored.";
+            letterMeter.style.width = "100%";
+            checkUnlockMessage();
+          } else {
+            feedback.textContent = "Keep typing — it will unlock automatically when correct.";
+          }
+        }
+
+        input.addEventListener("input", checkAnswer);
+      });
+    }
+
+    function checkUnlockMessage() {
+      const solvedCards = sectionBody.querySelectorAll(".chat-card.solved").length;
+      const unlockMessage = sectionBody.querySelector("#unlock-message");
+      if (unlockMessage && solvedCards === chatChallenges.length) {
+        unlockMessage.classList.add("visible");
+        showSecretOrderCelebration();
+      }
+    }
+
+    function showSecretOrderCelebration() {
+      if (!secretOrderModal || secretOrderModal.classList.contains("active")) return;
+      secretOrderModal.classList.add("active");
+      secretOrderModal.setAttribute("aria-hidden", "false");
+      const closeButton = secretOrderModal.querySelector("[data-close-secret]");
+      if (closeButton) closeButton.focus();
+    }
+
+    function closeSecretOrderCelebration() {
+      if (!secretOrderModal) return;
+      secretOrderModal.classList.remove("active");
+      secretOrderModal.setAttribute("aria-hidden", "true");
+    }
+
     function openSection(sectionKey) {
       const section = sections[sectionKey];
       if (!section) return;
@@ -581,6 +1091,10 @@
             openPhoto(Number(button.dataset.photoIndex));
           });
         });
+      }
+
+      if (sectionKey === "chat") {
+        attachChatGame();
       }
     }
 
@@ -653,6 +1167,7 @@
     document.querySelector("[data-close]").addEventListener("click", closeSection);
     document.querySelector("[data-close-video]").addEventListener("click", closeVideo);
     document.querySelector("[data-close-lightbox]").addEventListener("click", closePhoto);
+    document.querySelector("[data-close-secret]").addEventListener("click", closeSecretOrderCelebration);
     document.querySelector("[data-photo-next]").addEventListener("click", showNextPhoto);
     document.querySelector("[data-photo-prev]").addEventListener("click", showPreviousPhoto);
 
@@ -668,6 +1183,10 @@
       if (event.target === photoLightbox) closePhoto();
     });
 
+    secretOrderModal.addEventListener("click", function (event) {
+      if (event.target === secretOrderModal) closeSecretOrderCelebration();
+    });
+
     document.addEventListener("keydown", function (event) {
       if (photoLightbox.classList.contains("active")) {
         if (event.key === "ArrowRight") showNextPhoto();
@@ -677,6 +1196,7 @@
       }
 
       if (event.key !== "Escape") return;
+      if (secretOrderModal.classList.contains("active")) closeSecretOrderCelebration();
       if (videoModal.classList.contains("active")) closeVideo();
       if (sectionModal.classList.contains("active")) closeSection();
     });
