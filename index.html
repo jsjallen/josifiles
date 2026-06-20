@@ -633,11 +633,14 @@
 
     .secret-order-card h2 {
       margin: 0 0 16px;
+      max-width: 100%;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.2rem, 12vw, 5rem);
+      font-size: clamp(2.1rem, 9vw, 4.3rem);
       line-height: 0.92;
+      letter-spacing: -0.035em;
       text-transform: uppercase;
       color: #071107;
+      text-wrap: balance;
       text-shadow: 0 2px 0 rgba(255, 255, 255, 0.42);
     }
 
@@ -700,6 +703,10 @@
         grid-template-columns: 1fr;
       }
 
+      .secret-order-card h2 {
+        font-size: clamp(1.95rem, 8.2vw, 3.1rem);
+        letter-spacing: -0.06em;
+      }
     }
 
     @media (min-width: 760px) {
