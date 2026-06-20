@@ -146,9 +146,12 @@
       inset: 0;
       z-index: 50;
       display: none;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: center;
-      padding: 18px;
+      padding:
+        max(12px, env(safe-area-inset-top))
+        18px
+        max(18px, env(safe-area-inset-bottom));
       background:
         radial-gradient(circle at 50% 24%, rgba(121, 83, 38, 0.28), transparent 24rem),
         rgba(0, 0, 0, 0.72);
@@ -162,8 +165,10 @@
     .panel {
       position: relative;
       width: min(100%, 560px);
-      max-height: min(72svh, 720px);
+      max-height: calc(100dvh - max(12px, env(safe-area-inset-top)) - max(18px, env(safe-area-inset-bottom)) - 12px);
       overflow: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
       padding: 26px 24px 24px;
       border: 1px solid var(--line);
       border-radius: 24px 24px 18px 18px;
@@ -709,6 +714,7 @@
 
       .modal {
         align-items: center;
+        padding: 28px;
       }
 
       .panel {
